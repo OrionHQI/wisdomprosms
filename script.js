@@ -71,7 +71,7 @@ async function loadDashboard() {
     try {
 
         const response = await fetch(
-            "http://localhost:3000/dashboard",
+            "http://wisdomprosms-backend.onrender.com/dashboard",
             {
                 method: "GET",
                 headers: {
@@ -146,7 +146,7 @@ if (loginForm) {
             return;
         }
 
-        const response = await fetch("http://localhost:3000/login", {
+        const response = await fetch("http://wisdomprosms-backend.onrender.com/login", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
@@ -277,7 +277,7 @@ if (!country) {
         try {
 
             const response = await fetch(
-                `http://localhost:3000/available-numbers?country=${encodeURIComponent(country)}&service=${encodeURIComponent(service)}`,
+                `http://wisdomprosms-backend.onrender.com/available-numbers?country=${encodeURIComponent(country)}&service=${encodeURIComponent(service)}`,
                 {
                     method: "GET",
                     headers: {
@@ -385,7 +385,7 @@ if (!country) {
 
                                     const purchaseResponse =
                                         await fetch(
-                                            "http://localhost:3000/purchase-number",
+                                            "http://wisdomprosms-backend.onrender.com/purchase-number",
                                             {
                                                 method: "POST",
 
@@ -800,7 +800,7 @@ async function startWalletFunding() {
     if (message) message.textContent = "Creating secure payment...";
 
     try {
-        const response = await fetch("http://localhost:3000/fund-wallet", {
+        const response = await fetch("http://wisdomprosms-backend.onrender.com/fund-wallet", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
