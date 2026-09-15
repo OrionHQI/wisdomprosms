@@ -940,7 +940,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const email = document.getElementById("signup-email").value.trim();
     const password = document.getElementById("signup-password").value;
 
-    if (!username  !email  !password) {
+    if (!username || !email  || !password) {
       alert("Please fill in all required fields.");
       return;
     }
