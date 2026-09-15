@@ -927,3 +927,53 @@ if (localStorage.getItem("wisdomprosms_logged_in") === "true" && dashboard) {
         document.getElementById("sidebar-email").textContent = savedUsername;
     }
 }
+// SIGN UP FORM
+document.addEventListener("DOMContentLoaded", function () {
+  const signupForm = document.getElementById("signup-form");
+
+  if (!signupForm) return;
+
+  signupForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const username = document.getElementById("signup-username").value.trim();
+    const email = document.getElementById("signup-email").value.trim();
+    const password = document.getElementById("signup-password").value;
+
+    if (!username  !email  !password) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "https://wisdomprosms-backend.onrender.com/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            full_name: username,
+            email: email,
+            password: password
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || "Unable to create account.");
+        return;
+      }
+
+      alert("Account created successfully! You can now sign in.");
+      signupForm.reset();
+
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("Unable to connect to the server.");
+    }
+  });
+})
