@@ -5189,7 +5189,9 @@ body {
 .auth-section.active {
     display: flex;
 }
-
+#signin:target {
+    display: flex;
+}
 .auth-box {
     width: 100%;
     max-width: 520px;
