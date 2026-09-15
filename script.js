@@ -182,15 +182,17 @@ document.querySelectorAll("body > header, body > section, body > footer").forEac
 const dashboard = document.getElementById("dashboard");
 const username = document.getElementById("dashboard-name");
 
-if (username) username.textContent = email.trim();
+if (username) username.textContent = data.user.full_name;
 
 const sidebarUsername = document.getElementById("sidebar-username");
 const sidebarEmail = document.getElementById("sidebar-email");
 
-if (sidebarUsername) sidebarUsername.textContent = email.trim();
+if (sidebarUsername) sidebarUsername.textContent = data.user.full_name;
 if (sidebarEmail) sidebarEmail.textContent = email.trim();
 
 if (dashboard) dashboard.style.display = "flex";
+
+loadDashboard();
 
 message.textContent = "Login successful!";
 
