@@ -75,7 +75,7 @@ async function loadDashboard() {
             {
                 method: "GET",
                 headers: {
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": Bearer ${token}
                 }
             }
         );
@@ -83,49 +83,91 @@ async function loadDashboard() {
         const data = await response.json();
 
         if (!response.ok) {
-            console.error(data.message);
+            console.error(data.message || "Unable to load dashboard.");
             return;
         }
 
-        // Update wallet balance
-        const walletBalance = document.getElementById("wallet-balance");
+        // ================= USER NAME =================
+
+        const dashboardName =
+            document.getElementById("dashboard-name");
+
+        if (dashboardName) {
+            dashboardName.textContent = data.user.full_name;
+        }
+
+        const sidebarUsername =
+            document.getElementById("sidebar-username");
+
+        if (sidebarUsername) {
+            sidebarUsername.textContent = data.user.full_name;
+        }
+
+        const sidebarEmail =
+            document.getElementById("sidebar-email");
+
+        if (sidebarEmail) {
+            sidebarEmail.textContent = data.user.email;
+        }
+
+
+        // ================= WALLET =================
+
+        const walletBalance =
+            document.getElementById("wallet-balance");
+
+        const dashboardWallet =
+            document.getElementById("dashboard-wallet");
+
+        const formattedBalance =
+            ₦${Number(data.user.wallet_balance || 0).toLocaleString("en-NG", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            })};
 
         if (walletBalance) {
-            walletBalance.textContent =
-                `₦${Number(data.user.wallet_balance).toLocaleString("en-NG", {
-                    minimumFractionDigits: 2
-                })}`;
+            walletBalance.textContent = formattedBalance;
         }
-        // Update dashboard name
-const dashboardName =
-    document.getElementById("dashboard-name");
 
-if (dashboardName) {
-    dashboardName.textContent =
-        data.user.full_name;
-}
+        if (dashboardWallet) {
+            dashboardWallet.textContent = formattedBalance;
+        }
 
-// Update dashboard wallet
-const dashboardWallet =
-    document.getElementById("dashboard-wallet");
 
-if (dashboardWallet) {
-    dashboardWallet.textContent =
-        `₦${Number(data.user.wallet_balance).toLocaleString("en-NG", {
-            minimumFractionDigits: 2
-        })}`;
-}
+        // ================= REAL NUMBER COUNT =================
 
-        console.log("Dashboard loaded:", data.user);
+        const numbersCount =
+            document.getElementById("numbers-count");
+
+        if (numbersCount) {
+            numbersCount.textContent =
+                data.stats?.total_numbers ?? 0;
+        }
+
+
+        // ================= ACTIVE ORDERS =================
+
+        const messagesCount =
+            document.getElementById("messages-count");
+
+        if (messagesCount) {
+            messagesCount.textContent =
+                data.stats?.active_orders ?? 0;
+        }
+
+
+        console.log("Live dashboard data:", data);
 
     } catch (error) {
 
-        console.error("Unable to load dashboard:", error);
+        console.error(
+            "Unable to load dashboard:",
+            error
+        );
 
     }
 
 }
-
 // ================= LOGIN FORM =================
 
 const loginForm = document.getElementById("login-form");
