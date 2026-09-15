@@ -75,7 +75,7 @@ async function loadDashboard() {
             {
                 method: "GET",
                 headers: {
-                    "Authorization": 'Bearer $  {token }'
+                    "Authorization": 'Bearer $  {token }`
                 }
             }
         );
