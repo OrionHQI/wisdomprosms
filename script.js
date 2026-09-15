@@ -71,7 +71,7 @@ async function loadDashboard() {
     try {
 
         const response = await fetch(
-            "http://wisdomprosms-backend.onrender.com/dashboard",
+            "https://wisdomprosms-backend.onrender.com/dashboard",
             {
                 method: "GET",
                 headers: {
@@ -146,7 +146,7 @@ if (loginForm) {
             return;
         }
 
-        const response = await fetch("http://wisdomprosms-backend.onrender.com/login", {
+        const response = await fetch("https://wisdomprosms-backend.onrender.com/login", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
@@ -277,7 +277,7 @@ if (!country) {
         try {
 
             const response = await fetch(
-                `http://wisdomprosms-backend.onrender.com/available-numbers?country=${encodeURIComponent(country)}&service=${encodeURIComponent(service)}`,
+                `https://wisdomprosms-backend.onrender.com/available-numbers?country=${encodeURIComponent(country)}&service=${encodeURIComponent(service)}`,
                 {
                     method: "GET",
                     headers: {
@@ -385,7 +385,7 @@ if (!country) {
 
                                     const purchaseResponse =
                                         await fetch(
-                                            "http://wisdomprosms-backend.onrender.com/purchase-number",
+                                            "https://wisdomprosms-backend.onrender.com/purchase-number",
                                             {
                                                 method: "POST",
 
@@ -800,7 +800,7 @@ async function startWalletFunding() {
     if (message) message.textContent = "Creating secure payment...";
 
     try {
-        const response = await fetch("http://wisdomprosms-backend.onrender.com/fund-wallet", {
+        const response = await fetch("https://wisdomprosms-backend.onrender.com/fund-wallet", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
