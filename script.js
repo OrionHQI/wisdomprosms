@@ -1180,22 +1180,17 @@ async function loadFundingHistory() {
             })}
         </strong>
         <small>${transaction.reference_number}</small>
+        <small>${formattedDate}</small>
+        <div>
+            <span class="funding-status ${transaction.status}">
+                ${transaction.status}
+            </span>
+        </div>
     </div>
 `;
 
-                        <small>${formattedDate}</small>
-                    </div>
+historyList.appendChild(row);
 
-                    <div>
-                        <span class="funding-status ${transaction.status}">
-                            ${transaction.status}
-                        </span>
-                    </div>
-                ;
-
-                historyList.appendChild(row);
-            });
-        }
 
     } catch (error) {
         console.error("Unable to load funding history:", error);
