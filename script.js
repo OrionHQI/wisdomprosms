@@ -1172,15 +1172,16 @@ async function loadFundingHistory() {
 
                 row.className = "funding-transaction-row";
 
-                row.innerHTML = 
-                    <div>
-                        <strong>
-                            ₦${amount.toLocaleString("en-NG", {
-                                minimumFractionDigits: 2
-                            })}
-                        </strong>
-                        <small>${transaction.reference_number}</small>
-                    </div>
+                row.innerHTML = `
+    <div>
+        <strong>
+            ₦${amount.toLocaleString("en-NG", {
+                minimumFractionDigits: 2
+            })}
+        </strong>
+        <small>${transaction.reference_number}</small>
+    </div>
+`;
 
                     <div>
                         <small>${formattedDate}</small>
