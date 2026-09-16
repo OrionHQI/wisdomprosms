@@ -1156,43 +1156,43 @@ async function loadFundingHistory() {
         }
 
         if (historyList) {
-            historyList.innerHTML = "";
+    historyList.innerHTML = "";
 
-            transactions.forEach((transaction) => {
-                const row = document.createElement("div");
+    transactions.forEach((transaction) => {
+        const row = document.createElement("div");
 
-                const amount = Number(transaction.amount) || 0;
+        const amount = Number(transaction.amount) || 0;
+        const date = new Date(transaction.created_at);
 
-                const date = new Date(transaction.created_at);
+        const formattedDate = date.toLocaleString("en-NG", {
+            dateStyle: "medium",
+            timeStyle: "short"
+        });
 
-                const formattedDate = date.toLocaleString("en-NG", {
-                    dateStyle: "medium",
-                    timeStyle: "short"
-                });
+        row.className = "funding-transaction-row";
 
-                row.className = "funding-transaction-row";
+        try {
+            row.innerHTML = `
+                <div>
+                    <strong>
+                        ₦${amount.toLocaleString("en-NG", {
+                            minimumFractionDigits: 2
+                        })}
+                    </strong>
+                    <small>${transaction.reference_number}</small>
+                    <small>${formattedDate}</small>
+                    <div>
+                        <span class="funding-status ${transaction.status}">
+                            ${transaction.status}
+                        </span>
+                    </div>
+                </div>
+            `;
 
-                try {
-    row.innerHTML = `
-        <div>
-            <strong>
-                ₦${amount.toLocaleString("en-NG", {
-                    minimumFractionDigits: 2
-                })}
-            </strong>
-            <small>${transaction.reference_number}</small>
-            <small>${formattedDate}</small>
-            <div>
-                <span class="funding-status ${transaction.status}">
-                    ${transaction.status}
-                </span>
-            </div>
-        </div>
-    `;
+            historyList.appendChild(row);
 
-    historyList.appendChild(row);
-
-} catch (error) {
-    console.error("Unable to load funding history:", error);
+        } catch (error) {
+            console.error("Unable to load funding history:", error);
+        }
+    });
 }
-
