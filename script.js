@@ -1129,10 +1129,10 @@ async function loadFundingHistory() {
             document.getElementById("pending-funding-count");
 
         if (totalFundedElement) {
-            totalFundedElement.textContent =
-                ₦${totalFunded.toLocaleString("en-NG", {
-                    minimumFractionDigits: 2
-                })};
+           totalFundedElement.textContent = `₦${totalFunded.toLocaleString("en-NG", {
+    minimumFractionDigits: 2
+})}`;
+
         }
 
         if (successfulElement) {
