@@ -1172,27 +1172,27 @@ async function loadFundingHistory() {
 
                 row.className = "funding-transaction-row";
 
-                row.innerHTML = `
-    <div>
-        <strong>
-            ₦${amount.toLocaleString("en-NG", {
-                minimumFractionDigits: 2
-            })}
-        </strong>
-        <small>${transaction.reference_number}</small>
-        <small>${formattedDate}</small>
+                try {
+    row.innerHTML = `
         <div>
-            <span class="funding-status ${transaction.status}">
-                ${transaction.status}
-            </span>
+            <strong>
+                ₦${amount.toLocaleString("en-NG", {
+                    minimumFractionDigits: 2
+                })}
+            </strong>
+            <small>${transaction.reference_number}</small>
+            <small>${formattedDate}</small>
+            <div>
+                <span class="funding-status ${transaction.status}">
+                    ${transaction.status}
+                </span>
+            </div>
         </div>
-    </div>
-`;
+    `;
 
-historyList.appendChild(row);
+    historyList.appendChild(row);
 
-
-    } catch (error) {
-        console.error("Unable to load funding history:", error);
-    }
+} catch (error) {
+    console.error("Unable to load funding history:", error);
 }
+
