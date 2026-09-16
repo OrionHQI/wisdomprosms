@@ -121,11 +121,10 @@ async function loadDashboard() {
         const dashboardWallet =
             document.getElementById("dashboard-wallet");
 
-        const formattedBalance =
-            ₦${Number(data.user.wallet_balance || 0).toLocaleString("en-NG", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            })};
+        const formattedBalance = `₦${Number(data.user.wallet_balance || 0).toLocaleString("en-NG", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+})}`;
 
         if (walletBalance) {
             walletBalance.textContent = formattedBalance;
