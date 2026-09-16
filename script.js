@@ -126,6 +126,7 @@ async function loadDashboard() {
     maximumFractionDigits: 2
 })}`;
 
+
         if (walletBalance) {
             walletBalance.textContent = formattedBalance;
         }
