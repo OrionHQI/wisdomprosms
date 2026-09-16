@@ -747,7 +747,67 @@
     </div>
 
 </section>
+<!-- ================= FUNDING HISTORY ================= -->
+<section id="funding-history" class="user-dashboard" style="display: none;">
 
+    <div class="dashboard-header">
+        <div>
+            <h1>Funding History</h1>
+            <p>View your wallet funding transactions.</p>
+        </div>
+
+        <div class="dashboard-header-actions">
+            <button type="button"
+                    class="header-icon-button"
+                    onclick="showDashboardHome()"
+                    aria-label="Back to Dashboard">
+                ←
+            </button>
+        </div>
+    </div>
+
+    <button type="button"
+            class="back-to-dashboard"
+            onclick="showDashboardHome()">
+        ← Back to Dashboard
+    </button>
+
+    <div class="funding-summary-card">
+        <div>
+            <span>Total Funded</span>
+            <strong id="total-funded">₦0.00</strong>
+        </div>
+
+        <div>
+            <span>Successful</span>
+            <strong id="successful-funding-count">0</strong>
+        </div>
+
+        <div>
+            <span>Pending</span>
+            <strong id="pending-funding-count">0</strong>
+        </div>
+    </div>
+
+    <div class="funding-history-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Transactions</h2>
+                <p>Your wallet funding activity will appear here.</p>
+            </div>
+        </div>
+
+        <div id="funding-history-list">
+            <div id="funding-history-empty" class="empty-state">
+                <h3>No funding transactions yet</h3>
+                <p>Your wallet funding history will appear here after you make a payment.</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
 <!-- ================= PROFILE ================= -->
 <section id="profile" class="user-dashboard profile-section" style="display: none;">
 
