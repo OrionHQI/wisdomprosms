@@ -1065,4 +1065,138 @@ function showFundingHistoryPage() {
         top: 0,
         behavior: "smooth"
     });
+
+    loadFundingHistory();
+}
+
+
+async function loadFundingHistory() {
+    const token = localStorage.getItem("wisdomprosms_token");
+
+    if (!token) {
+        console.log("No login token found.");
+        return;
+    }
+
+    const historyList = document.getElementById("funding-history-list");
+    const emptyState = document.getElementById("funding-history-empty");
+
+    try {
+        const response = await fetch(
+            "https://wisdomprosms-backend.onrender.com/funding-history",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": Bearer ${token}
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(data.message);
+            return;
+        }
+
+        const transactions = data.transactions || [];
+
+        let totalFunded = 0;
+        let successfulCount = 0;
+        let pendingCount = 0;
+
+        transactions.forEach((transaction) => {
+            const amount = Number(transaction.amount) || 0;
+
+            if (transaction.status === "successful") {
+                totalFunded += amount;
+                successfulCount++;
+            }
+
+            if (transaction.status === "pending") {
+                pendingCount++;
+            }
+        });
+
+        const totalFundedElement =
+            document.getElementById("total-funded");
+
+        const successfulElement =
+            document.getElementById("successful-funding-count");
+
+        const pendingElement =
+            document.getElementById("pending-funding-count");
+
+        if (totalFundedElement) {
+            totalFundedElement.textContent =
+                ₦${totalFunded.toLocaleString("en-NG", {
+                    minimumFractionDigits: 2
+                })};
+        }
+
+        if (successfulElement) {
+            successfulElement.textContent = successfulCount;
+        }
+
+        if (pendingElement) {
+            pendingElement.textContent = pendingCount;
+        }
+
+        if (transactions.length === 0) {
+            if (emptyState) {
+                emptyState.style.display = "flex";
+            }
+
+            return;
+        }
+
+        if (emptyState) {
+            emptyState.style.display = "none";
+        }
+
+        if (historyList) {
+            historyList.innerHTML = "";
+
+            transactions.forEach((transaction) => {
+                const row = document.createElement("div");
+
+                const amount = Number(transaction.amount) || 0;
+
+                const date = new Date(transaction.created_at);
+
+                const formattedDate = date.toLocaleString("en-NG", {
+                    dateStyle: "medium",
+                    timeStyle: "short"
+                });
+
+                row.className = "funding-transaction-row";
+
+                row.innerHTML = 
+                    <div>
+                        <strong>
+                            ₦${amount.toLocaleString("en-NG", {
+                                minimumFractionDigits: 2
+                            })}
+                        </strong>
+                        <small>${transaction.reference_number}</small>
+                    </div>
+
+                    <div>
+                        <small>${formattedDate}</small>
+                    </div>
+
+                    <div>
+                        <span class="funding-status ${transaction.status}">
+                            ${transaction.status}
+                        </span>
+                    </div>
+                ;
+
+                historyList.appendChild(row);
+            });
+        }
+
+    } catch (error) {
+        console.error("Unable to load funding history:", error);
+    }
 }
