@@ -7557,3 +7557,20 @@ body.dark-mode #profile .form-group input[readonly] {
     }
 
 }
+/* =====================================================
+   BUY NUMBER HERO — FULL CONTENT WIDTH
+   ===================================================== */
+
+#buy-number {
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box;
+}
+
+#buy-number .buy-number-hero {
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box;
+}
