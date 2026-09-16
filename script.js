@@ -1183,7 +1183,6 @@ async function loadFundingHistory() {
     </div>
 `;
 
-                    <div>
                         <small>${formattedDate}</small>
                     </div>
 
