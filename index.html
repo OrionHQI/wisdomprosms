@@ -544,174 +544,235 @@
 </section>
 <!-- ================= BUY NUMBER ================= -->
 
-<section id="buy-number" class="user-dashboard" style="display: none;">
-<button type="button" class="back-to-dashboard" onclick="showDashboardHome()">
-    ← Back to Dashboard
-</button>
-    <div class="dashboard-header">
+<section id="buy-number" class="user-dashboard buy-number-section" style="display: none;">
+
+    <button type="button" class="back-to-dashboard" onclick="showDashboardHome()">
+        ← Back to Dashboard
+    </button>
+
+    <div class="buy-number-header">
         <div>
-            <small>WISDOMPROSMS</small>
+            <span class="buy-number-label">WISDOMPROSMS</span>
             <h2>Buy a Virtual Number</h2>
-            <p>Choose a country and service for your virtual number.</p>
+            <p>Choose a country and service to get your virtual number.</p>
         </div>
     </div>
 
-    <div class="dashboard-card">
+    <!-- HOW IT WORKS -->
 
-        <h3>Choose Number</h3>
+    <div class="buy-steps">
 
-        <label for="country-select">Country</label>
+        <div class="buy-step active">
+            <span>1</span>
+            <div>
+                <strong>Select Country</strong>
+                <small>Choose where your number should come from.</small>
+            </div>
+        </div>
 
-        <select id="country-select">
-    <option value="">Select country</option>
+        <div class="buy-step">
+            <span>2</span>
+            <div>
+                <strong>Select Service</strong>
+                <small>Choose the platform you want to verify.</small>
+            </div>
+        </div>
 
-    <option value="United States">United States</option>
-    <option value="Canada">Canada</option>
-    <option value="United Kingdom">United Kingdom</option>
-    <option value="Australia">Australia</option>
-    <option value="Austria">Austria</option>
-    <option value="Belgium">Belgium</option>
-    <option value="Brazil">Brazil</option>
-    <option value="Bulgaria">Bulgaria</option>
-    <option value="Chile">Chile</option>
-    <option value="China">China</option>
-    <option value="Colombia">Colombia</option>
-    <option value="Croatia">Croatia</option>
-    <option value="Cyprus">Cyprus</option>
-    <option value="Czech Republic">Czech Republic</option>
-    <option value="Denmark">Denmark</option>
-    <option value="Egypt">Egypt</option>
-    <option value="Estonia">Estonia</option>
-    <option value="Finland">Finland</option>
-    <option value="France">France</option>
-    <option value="Georgia">Georgia</option>
-    <option value="Germany">Germany</option>
-    <option value="Greece">Greece</option>
-    <option value="Hong Kong">Hong Kong</option>
-    <option value="Hungary">Hungary</option>
-    <option value="Iceland">Iceland</option>
-    <option value="India">India</option>
-    <option value="Indonesia">Indonesia</option>
-    <option value="Ireland">Ireland</option>
-    <option value="Israel">Israel</option>
-    <option value="Italy">Italy</option>
-    <option value="Japan">Japan</option>
-    <option value="Kazakhstan">Kazakhstan</option>
-    <option value="Kenya">Kenya</option>
-    <option value="Latvia">Latvia</option>
-    <option value="Lithuania">Lithuania</option>
-    <option value="Luxembourg">Luxembourg</option>
-    <option value="Malaysia">Malaysia</option>
-    <option value="Malta">Malta</option>
-    <option value="Mexico">Mexico</option>
-    <option value="Moldova">Moldova</option>
-    <option value="Morocco">Morocco</option>
-    <option value="Netherlands">Netherlands</option>
-    <option value="New Zealand">New Zealand</option>
-    <option value="Nigeria">Nigeria</option>
-    <option value="Norway">Norway</option>
-    <option value="Pakistan">Pakistan</option>
-    <option value="Panama">Panama</option>
-    <option value="Peru">Peru</option>
-    <option value="Philippines">Philippines</option>
-    <option value="Poland">Poland</option>
-    <option value="Portugal">Portugal</option>
-    <option value="Puerto Rico">Puerto Rico</option>
-    <option value="Romania">Romania</option>
-    <option value="Russia">Russia</option>
-    <option value="Saudi Arabia">Saudi Arabia</option>
-    <option value="Serbia">Serbia</option>
-    <option value="Singapore">Singapore</option>
-    <option value="Slovakia">Slovakia</option>
-    <option value="Slovenia">Slovenia</option>
-    <option value="South Africa">South Africa</option>
-    <option value="South Korea">South Korea</option>
-    <option value="Spain">Spain</option>
-    <option value="Sweden">Sweden</option>
-    <option value="Switzerland">Switzerland</option>
-    <option value="Taiwan">Taiwan</option>
-    <option value="Thailand">Thailand</option>
-    <option value="Tunisia">Tunisia</option>
-    <option value="Turkey">Turkey</option>
-    <option value="Ukraine">Ukraine</option>
-    <option value="United Arab Emirates">United Arab Emirates</option>
-    <option value="Uruguay">Uruguay</option>
-    <option value="Uzbekistan">Uzbekistan</option>
-    <option value="Venezuela">Venezuela</option>
-    <option value="Vietnam">Vietnam</option>
-    <option value="Zambia">Zambia</option>
-    <option value="Zimbabwe">Zimbabwe</option>
-</select>
+        <div class="buy-step">
+            <span>3</span>
+            <div>
+                <strong>Get Number</strong>
+                <small>Receive your number and start using it.</small>
+            </div>
+        </div>
 
-        <label for="service-select">Service</label>
+    </div>
 
-        <select id="service-select">
-    <option value="">Select service</option>
 
-    <option value="WhatsApp">WhatsApp</option>
-    <option value="Telegram">Telegram</option>
-    <option value="Facebook">Facebook</option>
-    <option value="Instagram">Instagram</option>
-    <option value="Google">Google</option>
-    <option value="TikTok">TikTok</option>
-    <option value="LinkedIn">LinkedIn</option>
-    <option value="Discord">Discord</option>
-    <option value="Spotify">Spotify</option>
-    <option value="X">X (Twitter)</option>
+    <!-- NUMBER SELECTION -->
 
-    <option value="Amazon">Amazon</option>
-    <option value="Apple">Apple</option>
-    <option value="Microsoft">Microsoft</option>
-    <option value="Netflix">Netflix</option>
-    <option value="PayPal">PayPal</option>
-    <option value="eBay">eBay</option>
-    <option value="Uber">Uber</option>
-    <option value="Bolt">Bolt</option>
-    <option value="Airbnb">Airbnb</option>
-    <option value="Binance">Binance</option>
-    <option value="Coinbase">Coinbase</option>
-    <option value="KuCoin">KuCoin</option>
-    <option value="OKX">OKX</option>
+    <div class="buy-number-card">
 
-    <option value="Snapchat">Snapchat</option>
-    <option value="Reddit">Reddit</option>
-    <option value="Pinterest">Pinterest</option>
-    <option value="Twitch">Twitch</option>
-    <option value="Viber">Viber</option>
-    <option value="Signal">Signal</option>
-    <option value="WeChat">WeChat</option>
-    <option value="LINE">LINE</option>
-    <option value="KakaoTalk">KakaoTalk</option>
+        <div class="buy-number-card-header">
+            <div>
+                <h3>Choose Your Number</h3>
+                <p>Select the country and service you need.</p>
+            </div>
 
-    <option value="Steam">Steam</option>
-    <option value="PlayStation">PlayStation</option>
-    <option value="Xbox">Xbox</option>
-    <option value="Epic Games">Epic Games</option>
+            <span class="secure-badge">
+                🔒 Secure
+            </span>
+        </div>
 
-    <option value="Yahoo">Yahoo</option>
-    <option value="Outlook">Outlook</option>
-    <option value="Proton Mail">Proton Mail</option>
 
-    <option value="Yandex">Yandex</option>
-    <option value="Indeed">Indeed</option>
-    <option value="Upwork">Upwork</option>
-    <option value="Fiverr">Fiverr</option>
-    <option value="Other">Other</option>
-</select>
-<div id="otherServiceContainer" style="display: none;">
-    <input
-        type="text"
-        id="otherService"
-        placeholder="Enter service name"
-        autocomplete="off"
-    >
-</div>
+        <div class="number-selection-grid">
 
-        <button id="continue-number-button">
-            Continue
-        </button>
+            <!-- COUNTRY -->
 
-        <p id="number-message"></p>
+            <div class="selection-field">
+
+                <label for="country-select">
+                    Country
+                </label>
+
+                <select id="country-select">
+
+                    <option value="">Select country</option>
+
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Austria">Austria</option>
+                    <option value="Belgium">Belgium</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="France">France</option>
+                    <option value="Germany">Germany</option>
+                    <option value="India">India</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Norway">Norway</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Portugal">Portugal</option>
+                    <option value="Saudi Arabia">Saudi Arabia</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="South Korea">South Korea</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Thailand">Thailand</option>
+                    <option value="Turkey">Turkey</option>
+                    <option value="United Arab Emirates">United Arab Emirates</option>
+                    <option value="Vietnam">Vietnam</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SERVICE -->
+            <div class="selection-field">
+
+                <label for="service-select">
+                    Service
+                </label>
+
+                <select id="service-select">
+
+                    <option value="">Select service</option>
+
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Telegram">Telegram</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Google">Google</option>
+                    <option value="TikTok">TikTok</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Discord">Discord</option>
+                    <option value="Spotify">Spotify</option>
+                    <option value="X">X (Twitter)</option>
+                    <option value="Amazon">Amazon</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Microsoft">Microsoft</option>
+                    <option value="Netflix">Netflix</option>
+                    <option value="PayPal">PayPal</option>
+                    <option value="Uber">Uber</option>
+                    <option value="Bolt">Bolt</option>
+                    <option value="Airbnb">Airbnb</option>
+                    <option value="Snapchat">Snapchat</option>
+                    <option value="Reddit">Reddit</option>
+                    <option value="Steam">Steam</option>
+                    <option value="PlayStation">PlayStation</option>
+                    <option value="Xbox">Xbox</option>
+                    <option value="Yahoo">Yahoo</option>
+                    <option value="Outlook">Outlook</option>
+                    <option value="Other">Other</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- CONTINUE -->
+
+            <div class="selection-action">
+
+                <button id="continue-number-button" type="button">
+                    Search Available Numbers
+                    <span>→</span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <p id="number-message" class="number-message"></p>
+
+    </div>
+
+
+    <!-- POPULAR SERVICES -->
+
+    <div class="popular-services">
+
+        <div class="section-title-row">
+            <div>
+                <h3>Popular Services</h3>
+                <p>Quickly choose a platform.</p>
+            </div>
+        </div>
+
+        <div class="service-chips">
+
+            <button type="button" data-service="WhatsApp">💬 WhatsApp</button>
+            <button type="button" data-service="Telegram">✈️ Telegram</button>
+            <button type="button" data-service="Facebook">f Facebook</button>
+            <button type="button" data-service="Instagram">◎ Instagram</button>
+            <button type="button" data-service="Google">G Google</button>
+            <button type="button" data-service="TikTok">♪ TikTok</button>
+            <button type="button" data-service="Discord">◉ Discord</button>
+            <button type="button" data-service="Spotify">● Spotify</button>
+
+        </div>
+
+    </div>
+
+
+    <!-- INFORMATION CARDS -->
+
+    <div class="buy-number-info-grid">
+
+        <div class="buy-info-card">
+            <span>🔐</span>
+            <div>
+                <strong>Secure & Private</strong>
+                <p>Your account and number information stay protected.</p>
+            </div>
+        </div>
+
+        <div class="buy-info-card">
+            <span>⚡️</span>
+            <div>
+                <strong>Fast Activation</strong>
+                <p>Get your number quickly when availability is confirmed.</p>
+            </div>
+        </div>
+
+        <div class="buy-info-card">
+            <span>🌍</span>
+            <div>
+                <strong>Multiple Countries</strong>
+                <p>Choose from the countries currently supported by the service.</p>
+            </div>
+        </div>
 
     </div>
 
