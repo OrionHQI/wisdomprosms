@@ -1023,3 +1023,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 })
+// ================= BACK TO DASHBOARD =================
+
+function showDashboardHome() {
+
+    // Hide all dashboard pages except the main dashboard
+    document.querySelectorAll(".user-dashboard").forEach((section) => {
+        if (section.id !== "dashboard") {
+            section.style.display = "none";
+        }
+    });
+
+    // Show the main dashboard
+    const dashboard = document.getElementById("dashboard");
+
+    if (dashboard) {
+        dashboard.style.display = "flex";
+    }
+
+    // Return to the top of the page
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+    // Refresh the dashboard data
+    loadDashboard();
+}
