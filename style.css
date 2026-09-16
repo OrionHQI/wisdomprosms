@@ -7121,3 +7121,439 @@ body.dark-mode #profile .form-group input[readonly] {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+/* =====================================================
+   BUY NUMBER HERO
+   ===================================================== */
+
+#buy-number .buy-number-hero {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 35px 40px;
+    margin-bottom: 25px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 75% 45%, rgba(43, 125, 255, 0.20), transparent 35%),
+        linear-gradient(135deg, #071a32, #0b2748);
+
+    border: 1px solid rgba(83, 151, 235, 0.15);
+    border-radius: 22px;
+}
+
+
+/* HERO TEXT */
+
+#buy-number .buy-number-hero-text {
+    position: relative;
+    z-index: 5;
+    max-width: 560px;
+}
+
+#buy-number .buy-number-label {
+    display: block;
+    margin-bottom: 10px;
+
+    color: #48a9ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+#buy-number .buy-number-hero-text h2 {
+    margin: 0 0 12px;
+
+    color: #ffffff;
+    font-size: 42px;
+    line-height: 1.08;
+    font-weight: 800;
+}
+
+#buy-number .buy-number-hero-text p {
+    margin: 0;
+
+    color: #a9bdd6;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+/* HERO VISUAL */
+
+#buy-number .buy-number-hero-visual {
+    position: relative;
+    width: 420px;
+    height: 280px;
+    flex-shrink: 0;
+}
+
+
+/* PHONE GLOW */
+
+#buy-number .hero-glow-circle {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+
+    top: 15px;
+    right: 75px;
+
+    border-radius: 50%;
+
+    background: rgba(40, 130, 255, 0.22);
+    filter: blur(35px);
+}
+
+
+/* PHONE */
+
+#buy-number .hero-phone {
+    position: absolute;
+
+    width: 145px;
+    height: 250px;
+
+    top: 15px;
+    right: 115px;
+
+    padding: 7px;
+
+    border-radius: 28px;
+
+    background: linear-gradient(
+        145deg,
+        #202d42,
+        #070e1a
+    );
+
+    border: 2px solid #55718f;
+
+    box-shadow:
+        0 25px 55px rgba(0, 0, 0, 0.55),
+        0 0 35px rgba(43, 135, 255, 0.35);
+
+    transform: rotate(7deg);
+
+    z-index: 3;
+}
+
+
+/* PHONE SCREEN */
+
+#buy-number .hero-phone-screen {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            160deg,
+            #0d5ed7,
+            #071a38 70%
+        );
+}
+
+
+/* PHONE SPEAKER */
+
+#buy-number .hero-phone-speaker {
+    position: absolute;
+
+    width: 45px;
+    height: 7px;
+
+    top: 13px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #03070d;
+    border-radius: 10px;
+
+    z-index: 10;
+}
+
+
+/* PHONE STATUS */
+
+#buy-number .hero-phone-status {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 14px 12px;
+
+    color: white;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+
+/* SMS CARD ON PHONE */
+
+#buy-number .hero-phone-message {
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+    top: 82px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+#buy-number .hero-phone-message span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #55718f;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+#buy-number .hero-phone-message strong {
+    display: block;
+
+    color: #1466d8;
+
+    font-size: 20px;
+}
+
+
+/* LOCK */
+
+#buy-number .hero-phone-lock {
+    position: absolute;
+
+    left: 50%;
+    bottom: 45px;
+
+    transform: translateX(-50%);
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.15);
+
+    font-size: 17px;
+}
+
+
+/* SMS FLOATING CARD */
+
+#buy-number .hero-sms-bubble {
+    position: absolute;
+
+    top: 70px;
+    right: 0;
+
+    padding: 13px 18px;
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.96);
+
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+
+    transform: rotate(-4deg);
+
+    z-index: 5;
+}
+
+#buy-number .hero-sms-bubble span {
+    display: block;
+
+    color: #5d7189;
+
+    font-size: 9px;
+}
+#buy-number .hero-sms-bubble strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #1269dd;
+
+    font-size: 18px;
+}
+
+
+/* FLOATING SERVICE ICONS */
+
+#buy-number .hero-floating-icon {
+    position: absolute;
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    color: white;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+
+    z-index: 6;
+}
+
+#buy-number .hero-whatsapp {
+    top: 20px;
+    left: 65px;
+
+    background: #20c96b;
+    transform: rotate(-8deg);
+}
+
+#buy-number .hero-telegram {
+    top: 135px;
+    left: 20px;
+
+    background: #249ddd;
+    transform: rotate(-10deg);
+}
+
+#buy-number .hero-instagram {
+    bottom: 25px;
+    left: 75px;
+
+    background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7);
+    transform: rotate(8deg);
+}
+
+#buy-number .hero-tiktok {
+    bottom: 15px;
+    right: 35px;
+
+    background: #111820;
+    border: 1px solid rgba(255,255,255,0.15);
+    transform: rotate(8deg);
+}
+
+
+/* SECURITY BADGE */
+
+#buy-number .hero-security-badge {
+    position: absolute;
+
+    top: 25px;
+    right: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 17px;
+
+    border-radius: 13px;
+
+    background: rgba(20, 51, 86, 0.75);
+
+    border: 1px solid rgba(111, 171, 239, 0.15);
+
+    z-index: 8;
+}
+
+#buy-number .hero-security-icon {
+    font-size: 23px;
+}
+
+#buy-number .hero-security-badge strong {
+    display: block;
+
+    color: white;
+
+    font-size: 12px;
+}
+
+#buy-number .hero-security-badge small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #8da9c7;
+
+    font-size: 10px;
+}
+
+
+/* PHONE ANIMATION */
+
+@keyframes wisdomPhoneFloat {
+
+    0% {
+        transform: rotate(7deg) translateY(0);
+    }
+
+    50% {
+        transform: rotate(7deg) translateY(-8px);
+    }
+
+    100% {
+        transform: rotate(7deg) translateY(0);
+    }
+
+}
+
+#buy-number .hero-phone {
+    animation: wisdomPhoneFloat 4s ease-in-out infinite;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    #buy-number .buy-number-hero {
+        min-height: 420px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 24px;
+    }
+
+    #buy-number .buy-number-hero-text {
+        max-width: 100%;
+    }
+
+    #buy-number .buy-number-hero-text h2 {
+        font-size: 32px;
+    }
+
+    #buy-number .buy-number-hero-visual {
+        width: 100%;
+        height: 230px;
+    }
+
+    #buy-number .hero-security-badge {
+        display: none;
+    }
+
+}
