@@ -785,7 +785,7 @@ document.querySelectorAll("#dashboard .sidebar-item").forEach((item) => {
             "fund-wallet-nav": showFundWalletPage,
             "profile-nav": showProfilePage,
             "order-history-nav": () => showDashboardPlaceholder("Order History"),
-            "funding-history-nav": () => showDashboardPlaceholder("Funding History"),
+            "funding-history-nav": showFundingHistoryPage,
             "settings-nav": () => showDashboardPlaceholder("Settings")
         };
         (routes[item.id] || (() => showDashboardPlaceholder(item.textContent.trim())))();
@@ -1049,4 +1049,20 @@ function showDashboardHome() {
 
     // Refresh the dashboard data
     loadDashboard();
+}
+function showFundingHistoryPage() {
+    document.querySelectorAll(".user-dashboard").forEach((section) => {
+        section.style.display = "none";
+    });
+
+    const fundingHistory = document.getElementById("funding-history");
+
+    if (fundingHistory) {
+        fundingHistory.style.display = "block";
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
