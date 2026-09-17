@@ -1087,9 +1087,8 @@ async function loadFundingHistory() {
             {
                 method: "GET",
                 headers: {
-    "Authorization": `Bearer ${token}`
+    "Authorization": "Bearer " + token
 }
-
             }
         );
 
