@@ -747,6 +747,64 @@
     </div>
 
 </section>
+<!-- ================= ACTIVE ORDERS ================= -->
+<section id="active-orders" class="user-dashboard" style="display: none;">
+
+    <div class="dashboard-header">
+        <div>
+            <h1>Active Orders</h1>
+            <p>Track your active number orders.</p>
+        </div>
+
+        <div class="dashboard-header-actions">
+            <button
+                type="button"
+                class="header-icon-button"
+                onclick="showDashboardHome()"
+                aria-label="Back to Dashboard">
+                ←
+            </button>
+        </div>
+    </div>
+
+    <button
+        type="button"
+        class="back-to-dashboard"
+        onclick="showDashboardHome()">
+        ← Back to Dashboard
+    </button>
+
+    <div class="active-orders-card">
+
+        <div class="section-heading">
+            <div>
+                <h2>Current Orders</h2>
+                <p>Your active number orders will appear here.</p>
+            </div>
+        </div>
+
+        <div id="active-orders-list">
+
+            <div id="active-orders-empty" class="empty-state">
+                <h3>No active orders</h3>
+                <p>
+                    When you purchase a number, your active order
+                    will appear here for tracking.
+                </p>
+
+                <button
+                    type="button"
+                    class="fund-wallet-empty-button"
+                    onclick="showBuyNumberPage()">
+                    Buy a Number
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 <!-- ================= FUNDING HISTORY ================= -->
 <section id="funding-history" class="user-dashboard" style="display: none;">
 
