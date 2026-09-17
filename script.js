@@ -1026,7 +1026,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // ================= BACK TO DASHBOARD =================
 
 function showDashboardHome() {
-
     // Hide all dashboard pages except the main dashboard
     document.querySelectorAll(".user-dashboard").forEach((section) => {
         if (section.id !== "dashboard") {
@@ -1036,7 +1035,6 @@ function showDashboardHome() {
 
     // Show the main dashboard
     const dashboard = document.getElementById("dashboard");
-
     if (dashboard) {
         dashboard.style.display = "flex";
     }
@@ -1050,13 +1048,13 @@ function showDashboardHome() {
     // Refresh the dashboard data
     loadDashboard();
 }
+
 function showFundingHistoryPage() {
     document.querySelectorAll(".user-dashboard").forEach((section) => {
         section.style.display = "none";
     });
 
     const fundingHistory = document.getElementById("funding-history");
-
     if (fundingHistory) {
         fundingHistory.style.display = "block";
     }
@@ -1068,7 +1066,6 @@ function showFundingHistoryPage() {
 
     loadFundingHistory();
 }
-
 
 async function loadFundingHistory() {
     const token = localStorage.getItem("wisdomprosms_token");
@@ -1087,8 +1084,8 @@ async function loadFundingHistory() {
             {
                 method: "GET",
                 headers: {
-    "Authorization": "Bearer " + token
-}
+                    "Authorization": `Bearer ${token}`
+                }
             }
         );
 
@@ -1118,21 +1115,15 @@ async function loadFundingHistory() {
             }
         });
 
-        const totalFundedElement =
-            document.getElementById("total-funded");
-
-        const successfulElement =
-            document.getElementById("successful-funding-count");
-
-        const pendingElement =
-            document.getElementById("pending-funding-count");
+        const totalFundedElement = document.getElementById("total-funded");
+        const successfulElement = document.getElementById("successful-funding-count");
+        const pendingElement = document.getElementById("pending-funding-count");
 
         if (totalFundedElement) {
             totalFundedElement.textContent =
-    `₦${totalFunded.toLocaleString("en-NG", {
-        minimumFractionDigits: 2
-    })}`;
-
+                `₦${totalFunded.toLocaleString("en-NG", {
+                    minimumFractionDigits: 2
+                })}`;
         }
 
         if (successfulElement) {
@@ -1147,7 +1138,6 @@ async function loadFundingHistory() {
             if (emptyState) {
                 emptyState.style.display = "flex";
             }
-
             return;
         }
 
@@ -1171,26 +1161,27 @@ async function loadFundingHistory() {
 
                 row.className = "funding-transaction-row";
 
-row.innerHTML = `
-    <div>
-        <strong>
-            ₦${amount.toLocaleString("en-NG", {
-                minimumFractionDigits: 2
-            })}
-        </strong>
-        <small>${transaction.reference_number}</small>
-        <small>${formattedDate}</small>
-        <div>
-            <span class="funding-status ${transaction.status}">
-                ${transaction.status}
-            </span>
-        </div>
-    </div>
-`;
+                row.innerHTML = `
+                    <div>
+                        <strong>
+                            ₦${amount.toLocaleString("en-NG", {
+                                minimumFractionDigits: 2
+                            })}
+                        </strong>
+                        <small>${transaction.reference_number}</small>
+                        <small>${formattedDate}</small>
+                        <div>
+                            <span class="funding-status ${transaction.status}">
+                                ${transaction.status}
+                            </span>
+                        </div>
+                    </div>
+                `;
 
-historyList.appendChild(row);
-});
-}
-} catch (error) {
-    console.error("Unable to load funding history:", error);
+                historyList.appendChild(row);
+            });
+        }
+    } catch (error) {
+        console.error("Unable to load funding history:", error);
+    }
 }
