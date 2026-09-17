@@ -1049,6 +1049,9 @@ function showDashboardHome() {
     loadDashboard();
 }
 function showActiveOrdersPage() {
+   if (window.activeOrdersRefresh) {
+        clearInterval(window.activeOrdersRefresh);
+    }
     document.querySelectorAll(".user-dashboard").forEach((section) => {
         section.style.display = "none";
     });
@@ -1064,6 +1067,7 @@ function showActiveOrdersPage() {
         behavior: "smooth"
     });
    loadActiveOrders();
+   window.activeOrdersRefresh = setInterval(loadActiveOrders, 5000);
 }
 async function loadActiveOrders() {
     const token = localStorage.getItem("wisdomprosms_token");
