@@ -1063,6 +1063,90 @@ function showActiveOrdersPage() {
         top: 0,
         behavior: "smooth"
     });
+   loadActiveOrders();
+}
+async function loadActiveOrders() {
+    const token = localStorage.getItem("wisdomprosms_token");
+
+    if (!token) {
+        console.log("No login token found.");
+        return;
+    }
+
+    const ordersList = document.getElementById("active-orders-list");
+    const emptyState = document.getElementById("active-orders-empty");
+
+    try {
+        const response = await fetch(
+            "https://wisdomprosms-backend.onrender.com/active-orders",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": Bearer ${token}
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(data.message);
+            return;
+        }
+
+        const orders = data.orders || [];
+
+        if (orders.length === 0) {
+            if (emptyState) {
+                emptyState.style.display = "flex";
+            }
+
+            return;
+        }
+
+        if (emptyState) {
+            emptyState.style.display = "none";
+        }
+
+        if (ordersList) {
+            ordersList.innerHTML = "";
+
+            orders.forEach((order) => {
+                const row = document.createElement("div");
+
+                const date = new Date(order.created_at);
+
+                const formattedDate = date.toLocaleString("en-NG", {
+                    dateStyle: "medium",
+                    timeStyle: "short"
+                });
+
+                row.className = "active-order-row";
+
+                row.innerHTML = 
+                    <div>
+                        <strong>${order.phone_number}</strong>
+                        <small>${order.service || "Unknown service"}</small>
+                        <small>${order.country || "Unknown country"}</small>
+                    </div>
+
+                    <div>
+                        <small>${formattedDate}</small>
+                    </div>
+
+                    <div>
+                        <span class="order-status ${order.status}">
+                            ${order.status}
+                        </span>
+                    </div>
+                ;
+
+                ordersList.appendChild(row);
+            });
+        }
+    } catch (error) {
+        console.error("Unable to load active orders:", error);
+    }
 }
 function showFundingHistoryPage() {
     document.querySelectorAll(".user-dashboard").forEach((section) => {
