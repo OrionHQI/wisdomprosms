@@ -1188,14 +1188,9 @@ row.innerHTML = `
     </div>
 `;
 
-                        </span>
-                    </div>
-                ;
-
-                historyList.appendChild(row);
-            });
-        }
-    } catch (error) {
-        console.error("Unable to load funding history:", error);
-    }
+historyList.appendChild(row);
+});
+}
+} catch (error) {
+    console.error("Unable to load funding history:", error);
 }
