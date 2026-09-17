@@ -1129,9 +1129,10 @@ async function loadFundingHistory() {
 
         if (totalFundedElement) {
             totalFundedElement.textContent =
-                ₦${totalFunded.toLocaleString("en-NG", {
-                    minimumFractionDigits: 2
-                })};
+    `₦${totalFunded.toLocaleString("en-NG", {
+        minimumFractionDigits: 2
+    })}`;
+
         }
 
         if (successfulElement) {
