@@ -777,7 +777,7 @@ document.querySelectorAll("#dashboard .sidebar-item").forEach((item) => {
         closeDashboardMenu();
         const routes = {
             "dashboard-nav": showDashboardHome,
-            "active-orders-nav": () => showDashboardPlaceholder("Active Orders"),
+            "active-orders-nav": showActiveOrdersPage,
             "buy-number-nav": showBuyNumberPage,
             "my-numbers-nav": () => showDashboardPlaceholder("My Numbers"),
             "messages-nav": () => showDashboardPlaceholder("Messages"),
@@ -1048,7 +1048,22 @@ function showDashboardHome() {
     // Refresh the dashboard data
     loadDashboard();
 }
+function showActiveOrdersPage() {
+    document.querySelectorAll(".user-dashboard").forEach((section) => {
+        section.style.display = "none";
+    });
 
+    const activeOrders = document.getElementById("active-orders");
+
+    if (activeOrders) {
+        activeOrders.style.display = "block";
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
 function showFundingHistoryPage() {
     document.querySelectorAll(".user-dashboard").forEach((section) => {
         section.style.display = "none";
