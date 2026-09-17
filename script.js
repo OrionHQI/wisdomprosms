@@ -772,6 +772,10 @@ function showProfilePage() {
 
 document.querySelectorAll("#dashboard .sidebar-item").forEach((item) => {
     item.addEventListener("click", () => {
+       if (window.activeOrdersRefresh) {
+    clearInterval(window.activeOrdersRefresh);
+    window.activeOrdersRefresh = null;
+}
         document.querySelectorAll("#dashboard .sidebar-item").forEach((link) => link.classList.remove("active"));
         item.classList.add("active");
         closeDashboardMenu();
