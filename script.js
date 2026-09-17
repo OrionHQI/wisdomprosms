@@ -149,13 +149,13 @@ async function loadDashboard() {
 
         // ================= ACTIVE ORDERS =================
 
-        const messagesCount =
-            document.getElementById("messages-count");
+        const activeOrdersCount =
+    document.getElementById("active-orders-count");
 
-        if (messagesCount) {
-            messagesCount.textContent =
-                data.stats?.active_orders ?? 0;
-        }
+if (activeOrdersCount) {
+    activeOrdersCount.textContent =
+        data.stats?.active_orders ?? 0;
+}
 
 
         console.log("Live dashboard data:", data);
