@@ -1123,23 +1123,23 @@ async function loadActiveOrders() {
 
                 row.className = "active-order-row";
 
-                row.innerHTML = 
-                    <div>
-                        <strong>${order.phone_number}</strong>
-                        <small>${order.service || "Unknown service"}</small>
-                        <small>${order.country || "Unknown country"}</small>
-                    </div>
+                row.innerHTML = `
+    <div>
+        <strong>${order.phone_number}</strong>
+        <small>${order.service || "Unknown service"}</small>
+        <small>${order.country || "Unknown country"}</small>
+    </div>
 
-                    <div>
-                        <small>${formattedDate}</small>
-                    </div>
+    <div>
+        <small>${formattedDate}</small>
+    </div>
 
-                    <div>
-                        <span class="order-status ${order.status}">
-                            ${order.status}
-                        </span>
-                    </div>
-                ;
+    <div>
+        <span class="order-status ${order.status}">
+            ${order.status}
+        </span>
+    </div>
+`;
 
                 ordersList.appendChild(row);
             });
