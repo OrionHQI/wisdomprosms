@@ -317,247 +317,82 @@ if (!country) {
             return;
         }
 
-        numberMessage.textContent =
-            "Checking available numbers...";
+        numberMessage.textContent = "Checking available offers...";
 
-        try {
-
-            const response = await fetch(
-                `https://wisdomprosms-backend.onrender.com/available-numbers?country=${encodeURIComponent(country)}&service=${encodeURIComponent(service)}`,
-                {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
-
-            const contentType = response.headers.get("content-type") || "";
-            const data = contentType.includes("application/json")
-                ? await response.json()
-                : null;
-
-            if (!response.ok || !data) {
-
-                numberMessage.textContent =
-                    data?.message ||
-                    "Unable to load available numbers. Please try again.";
-
-                return;
+try {
+    const response = await fetch(
+        "https://wisdomprosms-backend.onrender.com/number-offers?country=" +
+        encodeURIComponent(country) +
+        "&service=" +
+        encodeURIComponent(service),
+        {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Accept": "application/json"
             }
-
-            if (!data.numbers || data.numbers.length === 0) {
-
-                numberMessage.innerHTML = `
-                    <strong>No numbers available.</strong>
-                    <br>
-                    Try another country or service.
-                `;
-
-                return;
-            }
-
-            numberMessage.innerHTML = `
-                <strong>Available Numbers</strong>
-                <div id="available-numbers"></div>
-            `;
-
-            const numbersContainer =
-                document.getElementById("available-numbers");
-
-            data.numbers.forEach((item) => {
-
-                const numberCard =
-                    document.createElement("div");
-
-                numberCard.className =
-                    "number-option";
-
-                numberCard.innerHTML = `
-                    <div>
-                        <strong>${item.phone_number}</strong>
-                        <small>${item.country} · ${item.service}</small>
-                        <small>${item.price ?? "Set at checkout"}</small>
-                    </div>
-
-                    <button
-                        type="button"
-                        class="select-number-button">
-                        Select
-                    </button>
-                `;
-
-                const selectButton =
-                    numberCard.querySelector(
-                        ".select-number-button"
-                    );
-
-                selectButton.addEventListener(
-                    "click",
-                    () => {
-
-                        numberMessage.innerHTML = `
-                            <strong>Number Selected</strong>
-                            <br><br>
-
-                            <span>
-                                ${item.phone_number}
-                            </span>
-
-                            <br><br>
-
-                            <button
-                                type="button"
-                                id="purchase-number-button">
-                                Purchase Number
-                            </button>
-                        `;
-
-                        const purchaseButton =
-                            document.getElementById(
-                                "purchase-number-button"
-                            );
-
-                        purchaseButton.addEventListener(
-                            "click",
-                            async () => {
-
-                                purchaseButton.disabled = true;
-
-                                purchaseButton.textContent =
-                                    "Processing...";
-
-                                try {
-
-                                    const purchaseResponse =
-                                        await fetch(
-                                            "https://wisdomprosms-backend.onrender.com/purchase-number",
-                                            {
-                                                method: "POST",
-
-                                                headers: {
-                                                    "Content-Type":
-                                                        "application/json",
-
-                                                    "Authorization":
-                                                        `Bearer ${token}`
-                                                },
-
-                                                body: JSON.stringify({
-                                                    number_id: item.id,
-                                                    phone_number: item.phone_number,
-                                                    country: country,
-                                                    service: service
-                                                })
-                                            }
-                                        );
-
-                                    const purchaseData =
-                                        await purchaseResponse.json();
-
-                                    if (!purchaseResponse.ok) {
-
-                                        alert(
-                                            purchaseData.message ||
-                                            "Purchase failed."
-                                        );
-
-                                        purchaseButton.disabled =
-                                            false;
-
-                                        purchaseButton.textContent =
-                                            "Purchase Number";
-
-                                        return;
-                                    }
-
-                                    alert(
-                                        "Number purchased successfully!"
-                                    );
-
-                                    console.log(
-                                        "Purchased number:",
-                                        purchaseData
-                                    );
-
-                                    // Refresh wallet/dashboard
-                                    if (
-                                        typeof loadDashboard ===
-                                        "function"
-                                    ) {
-                                        loadDashboard();
-                                    }
-
-                                    numberMessage.innerHTML = `
-                                        <strong>
-                                            Number purchased successfully!
-                                        </strong>
-
-                                        <br><br>
-
-                                        ${purchaseData.number.phone_number}
-
-                                        <br><br>
-
-                                        <button
-                                            type="button"
-                                            id="buy-another-number">
-                                            Buy Another Number
-                                        </button>
-                                    `;
-
-                                    document
-                                        .getElementById(
-                                            "buy-another-number"
-                                        )
-                                        ?.addEventListener(
-                                            "click",
-                                            () => {
-
-                                                numberMessage.textContent =
-                                                    "Select another number.";
-
-                                                continueNumberButton.click();
-
-                                            }
-                                        );
-
-                                } catch (error) {
-                                    console.error(
-                                        "Purchase error:",
-                                        error
-                                    );
-
-                                    alert(
-                                        "Unable to complete purchase."
-                                    );
-
-                                    purchaseButton.disabled =
-                                        false;
-
-                                    purchaseButton.textContent =
-                                        "Purchase Number";
-                                }
-                            }
-                        );
-                    }
-                );
-
-                numbersContainer.appendChild(
-                    numberCard
-                );
-            });
-
-        } catch (error) {
-
-            console.error(
-                "Available numbers error:",
-                error
-            );
-
-            numberMessage.textContent =
-                "Unable to connect to the server.";
         }
+    );
+
+    const contentType = response.headers.get("content-type") || "";
+    const data = contentType.includes("application/json")
+        ? await response.json()
+        : null;
+
+    if (!response.ok || !data) {
+        numberMessage.textContent =
+            data?.message || "Unable to load available offers. Please try again.";
+        return;
+    }
+
+    if (!data.offers || data.offers.length === 0) {
+        numberMessage.innerHTML =
+            "<strong>No numbers available</strong><br><br>" +
+            "Try another country or service.";
+        return;
+    }
+
+    numberMessage.innerHTML =
+        "<strong>Available Numbers</strong>" +
+        '<div id="available-number-offers"></div>';
+
+    const offersContainer = document.getElementById("available-number-offers");
+
+    data.offers.forEach(function (item) {
+        const offerCard = document.createElement("div");
+        offerCard.className = "number-option";
+
+        offerCard.innerHTML =
+            "<div>" +
+                "<strong>" + (item.country_name || item.country) + "</strong>" +
+                "<small>" + (item.service_name || item.service) + "</small>" +
+                "<small>Available: " + item.available + "</small>" +
+                "<small>Success rate: " + item.success_rate + "</small>" +
+                "<strong>₦" + Number(item.customer_price_ngn).toLocaleString() + "</strong>" +
+            "</div>" +
+            '<button type="button" class="select-number-button">Select</button>';
+
+        const selectButton = offerCard.querySelector(".select-number-button");
+        selectButton.addEventListener("click", function () {
+            window.selectedNumberOffer = item;
+
+            numberMessage.innerHTML =
+                "<strong>Number Selected</strong><br><br>" +
+                "<span>" + (item.country_name || item.country) + " — " +
+                (item.service_name || item.service) + "</span><br><br>" +
+                "<strong>Price: ₦" + Number(item.customer_price_ngn).toLocaleString() +
+                "</strong><br><br>" +
+                "This number is ready for purchase.";
+        });
+
+        offersContainer.appendChild(offerCard);
+    });
+
+} catch (error) {
+    console.error("Available offers error:", error);
+    numberMessage.textContent = "Unable to connect to the server.";
+}
+
 
     });
 
