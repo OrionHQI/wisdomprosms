@@ -377,13 +377,98 @@ try {
             window.selectedNumberOffer = item;
 
             numberMessage.innerHTML =
-                "<strong>Number Selected</strong><br><br>" +
-                "<span>" + (item.country_name || item.country) + " — " +
-                (item.service_name || item.service) + "</span><br><br>" +
-                "<strong>Price: ₦" + Number(item.customer_price_ngn).toLocaleString() +
-                "</strong><br><br>" +
-                "This number is ready for purchase.";
-        });
+    "<strong>Confirm Purchase</strong><br><br>" +
+    "<span>" +
+    (item.country_name || item.country) +
+    " — " +
+    (item.service_name || item.service) +
+    "</span><br><br>" +
+    "<strong>Price: ₦" +
+    Number(item.customer_price_ngn).toLocaleString() +
+    "</strong><br><br>" +
+    "This amount will be deducted from your wallet only after you confirm the purchase." +
+    "<br><br>" +
+    '<button type="button" id="confirm-number-purchase">Confirm Purchase</button> ' +
+    '<button type="button" id="cancel-number-purchase">Cancel</button>';
+
+const confirmPurchaseButton = document.getElementById("confirm-number-purchase");
+const cancelPurchaseButton = document.getElementById("cancel-number-purchase");
+
+confirmPurchaseButton.addEventListener("click", async function () {
+    confirmPurchaseButton.disabled = true;
+    cancelPurchaseButton.disabled = true;
+
+    numberMessage.innerHTML =
+        "<strong>Processing purchase...</strong><br><br>" +
+        "Please wait while we secure your number.";
+
+    const token = localStorage.getItem("wisdomprosms_token");
+    if (!token) {
+        numberMessage.textContent = "Please log in again before purchasing.";
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            "https://wisdomprosms-backend.onrender.com/purchase-number",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    service: item.service,
+                    country: item.country,
+                    confirmed_price_ngn: Number(item.customer_price_ngn)
+                })
+            }
+        );
+
+        const contentType = response.headers.get("content-type") || "";
+        const data = contentType.includes("application/json")
+            ? await response.json()
+            : null;
+
+        if (!response.ok || !data) {
+            if (data?.price_changed) {
+                numberMessage.innerHTML =
+                    "<strong>Price Changed</strong><br><br>" +
+                    "The price has changed. No money was deducted." +
+                    "<br><br>" +
+                    "New price: ₦" +
+                    Number(data.customer_price_ngn).toLocaleString() +
+                    "<br><br>" +
+                    "Please select the offer again.";
+                return;
+            }
+
+            numberMessage.textContent =
+                data?.message || "Unable to complete the purchase.";
+            return;
+        }
+
+        numberMessage.innerHTML =
+            "<strong>Number purchased successfully!</strong><br><br>" +
+            "<strong>Number:</strong> " + data.phone_number + "<br><br>" +
+            "<strong>Service:</strong> " + data.service + "<br><br>" +
+            "<strong>Country:</strong> " + data.country + "<br><br>" +
+            "<strong>Amount paid:</strong> ₦" + Number(data.price).toLocaleString() + "<br><br>" +
+            "<strong>Status:</strong> " + data.status;
+
+    } catch (error) {
+        console.error("Purchase error:", error);
+        numberMessage.textContent = "Unable to connect to the server. Please try again.";
+    }
+});
+
+cancelPurchaseButton.addEventListener("click", function () {
+    numberMessage.innerHTML =
+        "<strong>Purchase cancelled.</strong><br><br>" +
+        "No money was deducted from your wallet.";
+});
+
 
         offersContainer.appendChild(offerCard);
     });
