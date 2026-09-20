@@ -461,7 +461,7 @@ confirmPurchaseButton.addEventListener("click", async function () {
         console.error("Purchase error:", error);
         numberMessage.textContent = "Unable to connect to the server. Please try again.";
     }
-});
+}); // <-- closes the confirmPurchaseButton handler
 
 cancelPurchaseButton.addEventListener("click", function () {
     numberMessage.innerHTML =
@@ -471,7 +471,7 @@ cancelPurchaseButton.addEventListener("click", function () {
 
 // Append each offer card inside the forEach loop
 offersContainer.appendChild(offerCard);
-}); // closes the forEach loop properly
+}); // <-- closes the forEach loop properly
 
 } catch (error) {
     console.error("Available offers error:", error);
