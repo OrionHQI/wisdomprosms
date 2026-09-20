@@ -469,7 +469,7 @@ cancelPurchaseButton.addEventListener("click", function () {
         "No money was deducted from your wallet.";
 });
 
-// Append each offer card inside the forEach loop
+});// Append each offer card inside the forEach loop
 offersContainer.appendChild(offerCard);
 }); // closes the forEach loop properly
 
