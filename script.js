@@ -469,19 +469,16 @@ cancelPurchaseButton.addEventListener("click", function () {
         "No money was deducted from your wallet.";
 });
 
+offersContainer.appendChild(offerCard);
+});
 
-        offersContainer.appendChild(offerCard);
-    });
+// End of forEach loop
 
 } catch (error) {
     console.error("Available offers error:", error);
     numberMessage.textContent = "Unable to connect to the server.";
 }
 
-
-    });
-
-}
 // ================= Old Menu References (Removed) =================
 // Old menu code that referenced non-existent #dashboard-menu elements has been removed.
 // The new dashboard uses sidebar-item buttons and is handled in DASHBOARD INTERACTIONS below.
