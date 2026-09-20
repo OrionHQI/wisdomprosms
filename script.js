@@ -450,18 +450,17 @@ confirmPurchaseButton.addEventListener("click", async function () {
         }
 
         numberMessage.innerHTML =
-    "<strong>Number purchased successfully!</strong><br><br>" +
-    "<strong>Number:</strong> " + data.phone_number + "<br><br>" +
-    "<strong>Service:</strong> " + data.service + "<br><br>" +
-    "<strong>Country:</strong> " + data.country + "<br><br>" +
-    "<strong>Amount paid:</strong> ₦" + Number(data.price).toLocaleString() + "<br><br>" +
-    "<strong>Status:</strong> " + data.status;
+            "<strong>Number purchased successfully!</strong><br><br>" +
+            "<strong>Number:</strong> " + data.phone_number + "<br><br>" +
+            "<strong>Service:</strong> " + data.service + "<br><br>" +
+            "<strong>Country:</strong> " + data.country + "<br><br>" +
+            "<strong>Amount paid:</strong> ₦" + Number(data.price).toLocaleString() + "<br><br>" +
+            "<strong>Status:</strong> " + data.status;
 
-} catch (error) {
-    console.error("Purchase error:", error);
-    numberMessage.textContent = "Unable to connect to the server. Please try again.";
-}
-
+    } catch (error) {
+        console.error("Purchase error:", error);
+        numberMessage.textContent = "Unable to connect to the server. Please try again.";
+    }
 });
 
 cancelPurchaseButton.addEventListener("click", function () {
@@ -472,13 +471,12 @@ cancelPurchaseButton.addEventListener("click", function () {
 
 // Append each offer card inside the forEach loop
 offersContainer.appendChild(offerCard);
-}); // <-- closes the forEach loop properly
+}); // closes the forEach loop properly
 
 } catch (error) {
     console.error("Available offers error:", error);
     numberMessage.textContent = "Unable to connect to the server.";
 }
-
 
 // ================= Old Menu References (Removed) =================
 // Old menu code that referenced non-existent #dashboard-menu elements has been removed.
