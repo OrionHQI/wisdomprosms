@@ -310,29 +310,42 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
 
         
 
-if (!country) {
-    numberMessage.textContent = "Please select a country.";
-        return;
-    }
+if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
+    continueNumberButton.addEventListener("click", async () => {
+        const country = countrySelect.value;
+        let service = serviceSelect.value;
 
-    if (!service) {
+        if (service === "Other") {
+            const otherServiceInput = document.getElementById("otherService");
+            service = otherServiceInput.value.trim();
 
-            numberMessage.textContent =
-                "Please select a service.";
+            if (!service) {
+                numberMessage.textContent = "Please enter the service you want.";
+                otherServiceInput.focus();
+                return;
+            }
+        }
 
+        if (!country) {
+            numberMessage.textContent = "Please select a country.";
             return;
         }
 
-        const token =
-            localStorage.getItem("wisdomprosms_token");
+        if (!service) {
+            numberMessage.textContent = "Please select a service.";
+            return;
+        }
 
+        const token = localStorage.getItem("wisdomprosms_token");
         if (!token) {
-
-            numberMessage.textContent =
-                "Please sign in to purchase a number.";
-
+            numberMessage.textContent = "Please sign in to purchase a number.";
             return;
         }
+
+        // ✅ At this point, all checks passed
+        console.log(`Country: ${country}, Service: ${service}, Token: ${token}`);
+    });
+}
 
         numberMessage.textContent = "Checking available offers...";
 
