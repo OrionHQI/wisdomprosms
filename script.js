@@ -351,15 +351,15 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
 
 try {
     const response = await fetch(
-    `https://wisdomprosms-backend.onrender.com/number-offers?country=${encodeURIComponent(country)}&service=${encodeURIComponent(service)}`,
-    {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Accept": "application/json"
+        `https://wisdomprosms-backend.onrender.com/number-offers?country=${encodeURIComponent(country)}&service=${encodeURIComponent(service)}`,
+        {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Accept": "application/json"
+            }
         }
-    }
-);
+    );
 
     const contentType = response.headers.get("content-type") || "";
     const data = contentType.includes("application/json")
@@ -368,7 +368,7 @@ try {
 
     if (!response.ok || !data) {
         numberMessage.textContent =
-            data?.message || "Unable to load available offers. Please try again.";
+            (data && data.message) || "Unable to load available offers. Please try again.";
         return;
     }
 
@@ -388,6 +388,7 @@ try {
     data.offers.forEach(function (item) {
         const offerCard = document.createElement("div");
         offerCard.className = "number-option";
+
 
         offerCard.innerHTML =
             "<div>" +
