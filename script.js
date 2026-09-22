@@ -290,12 +290,21 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
 if (selectedService === "Other") {
     service = document.getElementById("otherService").value.trim();
 
-    if (!service) {
-        numberMessage.textContent = "Please enter the service you want.";
-        document.getElementById("otherService").focus();
-        return;
-    }
-}
+    if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
+    continueNumberButton.addEventListener("click", async () => {
+        const country = countrySelect.value;
+        let service = serviceSelect.value;
+
+        if (service === "Other") {
+            const otherServiceInput = document.getElementById("otherService");
+            service = otherServiceInput.value.trim();
+
+            if (!service) {
+                numberMessage.textContent = "Please enter the service you want.";
+                otherServiceInput.focus();
+                return;
+            }
+        
 
 if (!country) {
     numberMessage.textContent = "Please select a country.";
