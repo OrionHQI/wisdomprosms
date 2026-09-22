@@ -280,8 +280,12 @@ const numberMessage =
 if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
     continueNumberButton.addEventListener("click", async () => {
         const country = countrySelect.value;
-        const selectedService = serviceSelect.value;
-        let service = selectedService;
+        const service = serviceSelect.value; // directly assign here
+        // now you can use `country` and `service` below
+        console.log(`Country: ${country}, Service: ${service}`);
+    });
+}
+
 
 if (selectedService === "Other") {
     service = document.getElementById("otherService").value.trim();
