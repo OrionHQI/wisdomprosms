@@ -287,10 +287,7 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
 }
 
 
-if (selectedService === "Other") {
-    service = document.getElementById("otherService").value.trim();
-
-    if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
+if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
     continueNumberButton.addEventListener("click", async () => {
         const country = countrySelect.value;
         let service = serviceSelect.value;
@@ -304,6 +301,13 @@ if (selectedService === "Other") {
                 otherServiceInput.focus();
                 return;
             }
+        }
+
+        // Now you can safely use `country` and `service`
+        console.log(`Country: ${country}, Service: ${service}`);
+    });
+}
+
         
 
 if (!country) {
