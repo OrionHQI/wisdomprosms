@@ -420,8 +420,8 @@ try {
     "</strong><br><br>" +
     "This amount will be deducted from your wallet only after you confirm the purchase." +
     "<br><br>" +
-    '<button type="button" id="confirm-number-purchase">Confirm Purchase</button> ' +
-    '<button type="button" id="cancel-number-purchase">Cancel</button>';
+    "<button type=\"button\" id=\"confirm-number-purchase\">Confirm Purchase</button>" +
+"<button type=\"button\" id=\"cancel-number-purchase\">Cancel</button>";
 
 const confirmPurchaseButton = document.getElementById("confirm-number-purchase");
 const cancelPurchaseButton = document.getElementById("cancel-number-purchase");
