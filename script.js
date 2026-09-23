@@ -351,11 +351,14 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
 
 try {
     const response = await fetch(
-        `https://wisdomprosms-backend.onrender.com/number-offers?country=${encodeURIComponent(country)}&service=${encodeURIComponent(service)}`,
+        "https://wisdomprosms-backend.onrender.com/number-offers?country=" +
+        encodeURIComponent(country) +
+        "&service=" +
+        encodeURIComponent(service),
         {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": "Bearer " + token,
                 "Accept": "application/json"
             }
         }
