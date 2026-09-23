@@ -503,6 +503,7 @@ cancelPurchaseButton.addEventListener("click", function () {
 
 offersContainer.appendChild(offerCard);
 }); // closes forEach
+}); // closes continue button
 } catch (error) {
     console.error("Available offers error:", error);
     numberMessage.textContent = "Unable to connect to the server.";
