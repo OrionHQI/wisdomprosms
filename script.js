@@ -311,17 +311,23 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
         
 
 if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
-    continueNumberButton.addEventListener("click", async () => {
+    continueNumberButton.addEventListener("click", async function () {
+
         const country = countrySelect.value;
         let service = serviceSelect.value;
 
         if (service === "Other") {
             const otherServiceInput = document.getElementById("otherService");
-            service = otherServiceInput.value.trim();
+
+            if (otherServiceInput) {
+                service = otherServiceInput.value.trim();
+            }
 
             if (!service) {
                 numberMessage.textContent = "Please enter the service you want.";
-                otherServiceInput.focus();
+                if (otherServiceInput) {
+                    otherServiceInput.focus();
+                }
                 return;
             }
         }
@@ -337,178 +343,215 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
         }
 
         const token = localStorage.getItem("wisdomprosms_token");
+
         if (!token) {
             numberMessage.textContent = "Please sign in to purchase a number.";
             return;
         }
 
-        // ✅ At this point, all checks passed
-        console.log(`Country: ${country}, Service: ${service}, Token: ${token}`);
-    });
-}
-
         numberMessage.textContent = "Checking available offers...";
 
-try {
-   continueNumberButton.addEventListener("click", async function () {
-    const response = await fetch(
-        "https://wisdomprosms-backend.onrender.com/number-offers?country=" +
-        encodeURIComponent(country) +
-        "&service=" +
-        encodeURIComponent(service),
-        {
-            method: "GET",
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Accept": "application/json"
-            }
-        }
-    );
+        try {
+            const response = await fetch(
+                "https://wisdomprosms-backend.onrender.com/number-offers?country=" +
+                encodeURIComponent(country) +
+                "&service=" +
+                encodeURIComponent(service),
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                        "Accept": "application/json"
+                    }
+                }
+            );
 
-    const contentType = response.headers.get("content-type") || "";
-    const data = contentType.includes("application/json")
-        ? await response.json()
-        : null;
+            const contentType =
+                response.headers.get("content-type") || "";
 
-    if (!response.ok || !data) {
-        numberMessage.textContent =
-            (data && data.message) || "Unable to load available offers. Please try again.";
-        return;
-    }
+            const data =
+                contentType.includes("application/json")
+                    ? await response.json()
+                    : null;
 
-    if (!data.offers || data.offers.length === 0) {
-        numberMessage.innerHTML =
-            "<strong>No numbers available</strong><br><br>" +
-            "Try another country or service.";
-        return;
-    }
-
-    numberMessage.innerHTML =
-        "<strong>Available Numbers</strong>" +
-        '<div id="available-number-offers"></div>';
-
-    const offersContainer = document.getElementById("available-number-offers");
-
-    data.offers.forEach(function (item) {
-        const offerCard = document.createElement("div");
-        offerCard.className = "number-option";
-
-
-        offerCard.innerHTML =
-            "<div>" +
-                "<strong>" + (item.country_name || item.country) + "</strong>" +
-                "<small>" + (item.service_name || item.service) + "</small>" +
-                "<small>Available: " + item.available + "</small>" +
-                "<small>Success rate: " + item.success_rate + "</small>" +
-                "<strong>₦" + Number(item.customer_price_ngn).toLocaleString() + "</strong>" +
-            "</div>" +
-            '<button type="button" class="select-number-button">Select</button>';
-
-        const selectButton = offerCard.querySelector(".select-number-button");
-        selectButton.addEventListener("click", function () {
-            window.selectedNumberOffer = item;
-
-            numberMessage.innerHTML =
-    "<strong>Confirm Purchase</strong><br><br>" +
-    "<span>" +
-    (item.country_name || item.country) +
-    " — " +
-    (item.service_name || item.service) +
-    "</span><br><br>" +
-    "<strong>Price: ₦" +
-    Number(item.customer_price_ngn).toLocaleString() +
-    "</strong><br><br>" +
-    "This amount will be deducted from your wallet only after you confirm the purchase." +
-    "<br><br>" +
-    "<button type=\"button\" id=\"confirm-number-purchase\">Confirm Purchase</button>" +
-"<button type=\"button\" id=\"cancel-number-purchase\">Cancel</button>";
-
-const confirmPurchaseButton = document.getElementById("confirm-number-purchase");
-const cancelPurchaseButton = document.getElementById("cancel-number-purchase");
-
-confirmPurchaseButton.addEventListener("click", async function () {
-    confirmPurchaseButton.disabled = true;
-    cancelPurchaseButton.disabled = true;
-
-    numberMessage.innerHTML =
-        "<strong>Processing purchase...</strong><br><br>" +
-        "Please wait while we secure your number.";
-
-    const token = localStorage.getItem("wisdomprosms_token");
-    if (!token) {
-        numberMessage.textContent = "Please log in again before purchasing.";
-        return;
-    }
-
-    try {
-        const response = await fetch(
-            "https://wisdomprosms-backend.onrender.com/purchase-number",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                    service: item.service,
-                    country: item.country,
-                    confirmed_price_ngn: Number(item.customer_price_ngn)
-                })
-            }
-        );
-
-        const contentType = response.headers.get("content-type") || "";
-        const data = contentType.includes("application/json")
-            ? await response.json()
-            : null;
-
-        if (!response.ok || !data) {
-            if (data?.price_changed) {
-                numberMessage.innerHTML =
-                    "<strong>Price Changed</strong><br><br>" +
-                    "The price has changed. No money was deducted." +
-                    "<br><br>" +
-                    "New price: ₦" +
-                    Number(data.customer_price_ngn).toLocaleString() +
-                    "<br><br>" +
-                    "Please select the offer again.";
+            if (!response.ok || !data) {
+                numberMessage.textContent =
+                    (data && data.message) ||
+                    "Unable to load available offers. Please try again.";
                 return;
             }
 
+            if (!data.offers || data.offers.length === 0) {
+                numberMessage.innerHTML =
+                    "<strong>No numbers available</strong><br><br>" +
+                    "Try another country or service.";
+                return;
+            }
+
+            numberMessage.innerHTML =
+                "<strong>Available Numbers</strong>" +
+                '<div id="available-number-offers"></div>';
+
+            const offersContainer =
+                document.getElementById("available-number-offers");
+
+            data.offers.forEach(function (item) {
+
+                const offerCard = document.createElement("div");
+                offerCard.className = "number-option";
+
+                offerCard.innerHTML =
+                    "<div>" +
+                    "<strong>" +
+                    (item.country_name || item.country) +
+                    "</strong>" +
+                    "<small>" +
+                    (item.service_name || item.service) +
+                    "</small>" +
+                    "<small>Available: " +
+                    item.available +
+                    "</small>" +
+                    "<small>Success rate: " +
+                    item.success_rate +
+                    "</small>" +
+                    "<strong>₦" +
+                    Number(item.customer_price_ngn).toLocaleString() +
+                    "</strong>" +
+                    "</div>" +
+                    '<button type="button" class="select-number-button">Select</button>';
+
+                const selectButton =
+                    offerCard.querySelector(".select-number-button");
+
+                selectButton.addEventListener("click", function () {
+
+                    numberMessage.innerHTML =
+                        "<strong>Confirm Purchase</strong><br><br>" +
+                        "<span>" +
+                        (item.country_name || item.country) +
+                        " — " +
+                        (item.service_name || item.service) +
+                        "</span><br><br>" +
+                        "<strong>Price: ₦" +
+                        Number(item.customer_price_ngn).toLocaleString() +
+                        "</strong><br><br>" +
+                        "This amount will be deducted from your wallet only after you confirm the purchase." +
+                        "<br><br>" +
+                        '<button type="button" id="confirm-number-purchase">Confirm Purchase</button>' +
+                        '<button type="button" id="cancel-number-purchase">Cancel</button>';
+
+                    const confirmPurchaseButton =
+                        document.getElementById("confirm-number-purchase");
+
+                    const cancelPurchaseButton =
+                        document.getElementById("cancel-number-purchase");
+
+                    confirmPurchaseButton.addEventListener(
+                        "click",
+                        async function () {
+
+                            confirmPurchaseButton.disabled = true;
+                            cancelPurchaseButton.disabled = true;
+
+                            numberMessage.innerHTML =
+                                "<strong>Processing purchase...</strong><br><br>" +
+                                "Please wait while we secure your number.";
+
+                            try {
+                                const purchaseResponse = await fetch(
+                                    "https://wisdomprosms-backend.onrender.com/purchase-number",
+                                    {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                            "Authorization": "Bearer " + token,
+                                            "Accept": "application/json"
+                                        },
+                                        body: JSON.stringify({
+                                            service: item.service,
+                                            country: item.country,
+                                            confirmed_price_ngn:
+                                                Number(item.customer_price_ngn)
+                                        })
+                                    }
+                                );
+
+                                const purchaseContentType =
+                                    purchaseResponse.headers.get("content-type") || "";
+
+                                const purchaseData =
+                                    purchaseContentType.includes("application/json")
+                                        ? await purchaseResponse.json()
+                                        : null;
+
+                                if (!purchaseResponse.ok || !purchaseData) {
+
+                                    if (purchaseData && purchaseData.price_changed) {
+                                        numberMessage.innerHTML =
+                                            "<strong>Price Changed</strong><br><br>" +
+                                            "The price has changed. No money was deducted." +
+                                            "<br><br>" +
+                                            "New price: ₦" +
+                                            Number(
+                                                purchaseData.customer_price_ngn
+                                            ).toLocaleString() +
+                                            "<br><br>" +
+                                            "Please select the offer again.";
+                                        return;
+                                    }
+
+                                    numberMessage.textContent =
+                                        (purchaseData && purchaseData.message) ||
+                                        "Unable to complete the purchase.";
+                                    return;
+                                }
+
+                                numberMessage.innerHTML =
+                                    "<strong>Number purchased successfully!</strong><br><br>" +
+                                    "<strong>Number:</strong> " +
+                                    purchaseData.phone_number +
+                                    "<br><br>" +
+                                    "<strong>Service:</strong> " +
+                                    purchaseData.service +
+                                    "<br><br>" +
+                                    "<strong>Country:</strong> " +
+                                    purchaseData.country +
+                                    "<br><br>" +
+                                    "<strong>Amount paid:</strong> ₦" +
+                                    Number(purchaseData.price).toLocaleString() +
+                                    "<br><br>" +
+                                    "<strong>Status:</strong> " +
+                                    purchaseData.status;
+
+                            } catch (error) {
+                                console.error("Purchase error:", error);
+
+                                numberMessage.textContent =
+                                    "Unable to connect to the server. Please try again.";
+                            }
+                        }
+                    );
+
+                    cancelPurchaseButton.addEventListener(
+                        "click",
+                        function () {
+                            numberMessage.innerHTML =
+                                "<strong>Purchase cancelled.</strong><br><br>" +
+                                "No money was deducted from your wallet.";
+                        }
+                    );
+                });
+
+                offersContainer.appendChild(offerCard);
+            });
+        } catch (error) {
+            console.error("Available offers error:", error);
+
             numberMessage.textContent =
-                data?.message || "Unable to complete the purchase.";
-            return;
+                "Unable to connect to the server.";
         }
-
-        numberMessage.innerHTML =
-    "<strong>Number purchased successfully!</strong><br><br>" +
-    "<strong>Number:</strong> " + data.phone_number + "<br><br>" +
-    "<strong>Service:</strong> " + data.service + "<br><br>" +
-    "<strong>Country:</strong> " + data.country + "<br><br>" +
-    "<strong>Amount paid:</strong> ₦" + Number(data.price).toLocaleString() + "<br><br>" +
-    "<strong>Status:</strong> " + data.status;
-
-} catch (error) {
-    console.error("Purchase error:", error);
-    numberMessage.textContent = "Unable to connect to the server. Please try again.";
+    });
 }
-}); // closes the confirmPurchaseButton handler
-
-cancelPurchaseButton.addEventListener("click", function () {
-    numberMessage.innerHTML =
-        "<strong>Purchase cancelled.</strong><br><br>" +
-        "No money was deducted from your wallet.";
-});
-
-offersContainer.appendChild(offerCard);
-}); // closes forEach
-}); // closes continue button
-} catch (error) {
-    console.error("Available offers error:", error);
-    numberMessage.textContent = "Unable to connect to the server.";
-}
-
 // ================= Old Menu References (Removed) =================
 // Old menu code that referenced non-existent #dashboard-menu elements has been removed.
 // The new dashboard uses sidebar-item buttons and is handled in DASHBOARD INTERACTIONS below.
