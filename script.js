@@ -1321,3 +1321,9 @@ async function loadFundingHistory() {
         console.error("Unable to load funding history:", error);
     }
 }
+// Keep Sign In hidden on the landing page
+const signinPage = document.getElementById("signin");
+
+if (signinPage && !signinPage.classList.contains("active")) {
+    signinPage.style.display = "none";
+}
