@@ -571,25 +571,29 @@ signupButtons.forEach((button) => {
 
         event.preventDefault();
 
-        // Hide everything on the landing page
+        if (!signupSection) return;
+
+        // Hide the landing page only
         document.querySelectorAll(
-            "body > header, body > section, body > footer"
+            "body > header, body > section:not(#signup), body > footer"
         ).forEach((section) => {
             section.style.display = "none";
         });
 
-        // Show only the sign-up page
-        if (signupSection) {
-            signupSection.style.setProperty("display", "flex", "important");
-            signupSection.classList.add("show");
+        // Show the signup page
+        signupSection.style.setProperty(
+            "display",
+            "flex",
+            "important"
+        );
 
-            // Prevent scrolling back to the landing page
-            document.body.style.overflow = "hidden";
+        signupSection.classList.add("show");
 
-            // Start at the top of the sign-up page
-            window.scrollTo(0, 0);
-        }
+        // Prevent scrolling back to the landing page
+        document.body.style.overflow = "hidden";
 
+        // Start at the top
+        window.scrollTo(0, 0);
     });
 
 });
