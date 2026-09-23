@@ -565,42 +565,72 @@ document.addEventListener("click", function (event) {
         '.sign-up, a[href="#signup"], .get-started, .cta-button'
     );
 
-    if (!signupButton) return;
+    const signinLink = event.target.closest(
+        'a[href="#signin"]'
+    );
 
-    event.preventDefault();
+    // SIGN UP
+    if (signupButton) {
 
-    const signupPage = document.getElementById("signup");
+        event.preventDefault();
 
-    if (!signupPage) {
-        console.error("Signup section not found.");
+        const signupPage = document.getElementById("signup");
+
+        if (!signupPage) return;
+
+        // Hide landing page sections
+        document.querySelectorAll(
+            "body > header, body > section, body > footer"
+        ).forEach(function (section) {
+
+            if (section.id !== "signup") {
+                section.style.display = "none";
+            }
+
+        });
+
+        // Show signup page
+        signupPage.style.setProperty(
+            "display",
+            "flex",
+            "important"
+        );
+
+        signupPage.classList.add("show");
+
+        // IMPORTANT: allow the signup page itself to scroll
+        document.body.style.overflow = "auto";
+
+        window.scrollTo(0, 0);
+
         return;
     }
 
-    // Hide the landing page
-    document.querySelectorAll(
-        "body > header, body > section, body > footer"
-    ).forEach(function (section) {
+    // SIGN IN FROM SIGNUP PAGE
+    if (signinLink) {
 
-        if (section.id !== "signup") {
-            section.style.display = "none";
+        event.preventDefault();
+
+        const signupPage = document.getElementById("signup");
+        const signinPage = document.getElementById("signin");
+
+        if (!signinPage) return;
+
+        // Hide signup
+        if (signupPage) {
+            signupPage.style.display = "none";
+            signupPage.classList.remove("show");
         }
 
-    });
+        // Show signin
+        signinPage.style.display = "flex";
+        signinPage.classList.add("active");
 
-    // Show ONLY the signup page
-    signupPage.style.setProperty(
-        "display",
-        "flex",
-        "important"
-    );
+        // Allow signin page to scroll if needed
+        document.body.style.overflow = "auto";
 
-    signupPage.classList.add("show");
-
-    // Lock the page to the signup screen
-    document.body.style.overflow = "hidden";
-
-    // Start at the top
-    window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
+    }
 
 });
 // ===============================
@@ -628,7 +658,7 @@ if (signInButton && signInSection) {
         signInSection.classList.add("active");
 
         // Prevent scrolling back to the landing page
-        document.body.style.overflow = "hidden";
+       
 
         // Start at the top of the sign-in page
         window.scrollTo(0, 0);
