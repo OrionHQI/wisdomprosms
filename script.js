@@ -658,7 +658,7 @@ if (signInButton && signInSection) {
         signInSection.classList.add("active");
 
         // Prevent scrolling back to the landing page
-       
+       document.body.style.overflow = "hidden";
 
         // Start at the top of the sign-in page
         window.scrollTo(0, 0);
