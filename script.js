@@ -350,6 +350,7 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
         numberMessage.textContent = "Checking available offers...";
 
 try {
+   continueNumberButton.addEventListener("click", async function () {
     const response = await fetch(
         "https://wisdomprosms-backend.onrender.com/number-offers?country=" +
         encodeURIComponent(country) +
