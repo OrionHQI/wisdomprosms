@@ -561,39 +561,35 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
 
 const signupSection = document.getElementById("signup");
 
-const signupButtons = document.querySelectorAll('a[href="#signup"]');
+const signupButtons = document.querySelectorAll(
+    'a[href="#signup"], a[href="#get-started"], a.get-started, .get-started'
+);
 
 signupButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
+
+    button.addEventListener("click", function (event) {
+
         event.preventDefault();
 
+        // Hide everything on the landing page
+        document.querySelectorAll(
+            "body > header, body > section, body > footer"
+        ).forEach((section) => {
+            section.style.display = "none";
+        });
+
+        // Show only the sign-up page
         if (signupSection) {
             signupSection.style.display = "flex";
-
-            signupSection.scrollIntoView({
-                behavior: "smooth"
-            });
-        }
-    });
-});
-document.addEventListener("DOMContentLoaded", function () {
-
-    const signupSection = document.getElementById("signup");
-
-    const signupButtons = document.querySelectorAll(
-        'a[href="#signup"], a[href="#get-started"], a.get-started, .get-started'
-    );
-
-    signupButtons.forEach(function (button) {
-        button.addEventListener("click", function (e) {
-            e.preventDefault();
-
             signupSection.classList.add("show");
 
-            signupSection.scrollIntoView({
-                behavior: "smooth"
-            });
-        });
+            // Prevent scrolling back to the landing page
+            document.body.style.overflow = "hidden";
+
+            // Start at the top of the sign-up page
+            window.scrollTo(0, 0);
+        }
+
     });
 
 });
