@@ -597,35 +597,38 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
-// ================================
+// ===============================
 // SIGN IN TOGGLE
-// ================================
+// ===============================
 
-const signInButton = document.querySelector('.sign-in');
-const signInSection = document.getElementById('signin');
+const signInButton = document.querySelector(".sign-in");
+const signInSection = document.getElementById("signin");
 
 if (signInButton && signInSection) {
-    signInButton.addEventListener('click', function (event) {
+
+    signInButton.addEventListener("click", function (event) {
+
         event.preventDefault();
 
-        localStorage.removeItem("wisdomprosms_logged_in");
-        document.body.classList.remove("logged-in");
-        document.querySelectorAll("body > header, body > section, body > footer").forEach((section) => {
-            section.style.display = "";
+        // Hide everything on the landing page
+        document.querySelectorAll(
+            "body > header, body > section, body > footer"
+        ).forEach((section) => {
+            section.style.display = "none";
         });
 
-        if (dashboard) dashboard.style.display = "none";
-        const profileSection = document.getElementById("profile");
-        const buyNumberSection = document.getElementById("buy-number");
-        if (profileSection) profileSection.style.display = "none";
-        if (buyNumberSection) buyNumberSection.style.display = "none";
+        // Show only the sign-in page
+        signInSection.style.display = "flex";
+        signInSection.classList.add("active");
 
-        signInSection.classList.add('active');
+        // Prevent scrolling back to the landing page
+        document.body.style.overflow = "hidden";
 
-        signInSection.scrollIntoView({
-            behavior: 'smooth'
-        });
+        // Start at the top of the sign-in page
+        window.scrollTo(0, 0);
+
     });
+
 }
 
 // ================= DASHBOARD TEST INTERACTIONS =================
