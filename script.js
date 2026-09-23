@@ -501,7 +501,6 @@ cancelPurchaseButton.addEventListener("click", function () {
         "No money was deducted from your wallet.";
 });
 
-}); // Append each offer card inside the forEach loop
 offersContainer.appendChild(offerCard);
 }); // closes forEach
 } catch (error) {
