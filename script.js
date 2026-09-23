@@ -559,42 +559,48 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
 
 // ================= SIGN UP PAGE =================
 
-const signupSection = document.getElementById("signup");
+document.addEventListener("click", function (event) {
 
-const signupButtons = document.querySelectorAll(
-    'a[href="#signup"], a[href="#get-started"], a.get-started, .get-started'
-);
+    const signupButton = event.target.closest(
+        '.sign-up, a[href="#signup"], .get-started, .cta-button'
+    );
 
-signupButtons.forEach((button) => {
+    if (!signupButton) return;
 
-    button.addEventListener("click", function (event) {
+    event.preventDefault();
 
-        event.preventDefault();
+    const signupPage = document.getElementById("signup");
 
-        if (!signupSection) return;
+    if (!signupPage) {
+        console.error("Signup section not found.");
+        return;
+    }
 
-        // Hide the landing page only
-        document.querySelectorAll(
-            "body > header, body > section:not(#signup), body > footer"
-        ).forEach((section) => {
+    // Hide the landing page
+    document.querySelectorAll(
+        "body > header, body > section, body > footer"
+    ).forEach(function (section) {
+
+        if (section.id !== "signup") {
             section.style.display = "none";
-        });
+        }
 
-        // Show the signup page
-        signupSection.style.setProperty(
-            "display",
-            "flex",
-            "important"
-        );
-
-        signupSection.classList.add("show");
-
-        // Prevent scrolling back to the landing page
-        document.body.style.overflow = "hidden";
-
-        // Start at the top
-        window.scrollTo(0, 0);
     });
+
+    // Show ONLY the signup page
+    signupPage.style.setProperty(
+        "display",
+        "flex",
+        "important"
+    );
+
+    signupPage.classList.add("show");
+
+    // Lock the page to the signup screen
+    document.body.style.overflow = "hidden";
+
+    // Start at the top
+    window.scrollTo(0, 0);
 
 });
 // ===============================
