@@ -580,7 +580,7 @@ signupButtons.forEach((button) => {
 
         // Show only the sign-up page
         if (signupSection) {
-            signupSection.style.display = "flex";
+            signupSection.style.setProperty("display", "flex", "important");
             signupSection.classList.add("show");
 
             // Prevent scrolling back to the landing page
