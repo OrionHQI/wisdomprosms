@@ -159,63 +159,6 @@ if (activeOrdersCount) {
 
 
         console.log("Live dashboard data:", data);
-       // ================= REAL RECENT ACTIVITY =================
-
-const recentActivity = document.getElementById("recent-activity");
-
-if (recentActivity) {
-    try {
-        const activityResponse = await fetch(
-            "https://wisdomprosms-backend.onrender.com/active-orders",
-            {
-                method: "GET",
-                headers: {
-                    "Authorization": "Bearer " + token
-                }
-            }
-        );
-
-        const activityData = await activityResponse.json();
-
-        if (activityResponse.ok && activityData.orders) {
-            if (activityData.orders.length === 0) {
-                recentActivity.innerHTML = 
-                    <div class="activity-empty">
-                        <strong>No recent activity yet</strong>
-                        <small>Your purchases and wallet activity will appear here.</small>
-                    </div>
-                ;
-            } else {
-                recentActivity.innerHTML = activityData.orders
-                    .slice(0, 5)
-                    .map(order => 
-                        <div class="activity-row">
-                            <span class="activity-icon blue">☎️</span>
-
-                            <div>
-                                <strong>${order.service || "SMS Activation"}</strong>
-                                <small>
-                                    ${order.country || "Unknown"} ·
-                                    ${new Date(order.created_at).toLocaleDateString("en-GB", {
-                                        day: "2-digit",
-                                        month: "short"
-                                    })}
-                                </small>
-                            </div>
-
-                            <span class="activity-status received">
-                                ${order.status || "Active"}<br>
-                                <b>${order.phone_number || ""}</b>
-                            </span>
-                        </div>
-                    )
-                    .join("");
-            }
-        }
-    } catch (error) {
-        console.error("Unable to load recent activity:", error);
-    }
-}
 
     } catch (error) {
 
