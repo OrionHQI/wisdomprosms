@@ -7535,3 +7535,118 @@ body.dark-mode #profile .form-group input[readonly] {
         transform-origin: bottom right;
     }
 }
+/* =========================================
+   WISDOMPROSMS — DASHBOARD LIGHT MODE
+   ========================================= */
+
+body:not(.dark-mode) #dashboard.user-dashboard {
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(37, 99, 235, 0.08),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #f5f8ff,
+            #eef4ff 55%,
+            #f8fbff
+        );
+
+    color: #172033;
+}
+
+/* Main dashboard */
+body:not(.dark-mode) #dashboard .dashboard-main {
+    background: #f5f8ff;
+}
+
+/* Header */
+body:not(.dark-mode) #dashboard #dashboard-name {
+    color: #172033;
+}
+
+body:not(.dark-mode) #dashboard .dashboard-header p {
+    color: #64748b;
+}
+
+/* Dashboard cards */
+body:not(.dark-mode) #dashboard .dashboard-card,
+body:not(.dark-mode) #dashboard .dashboard-stat {
+    background: #ffffff;
+    border-color: rgba(30, 64, 175, 0.10);
+
+    box-shadow:
+        0 10px 30px rgba(30, 64, 175, 0.08);
+}
+
+body:not(.dark-mode) #dashboard .dashboard-card h3,
+body:not(.dark-mode) #dashboard .dashboard-stat h3 {
+    color: #172033;
+}
+
+/* Stat numbers */
+body:not(.dark-mode) #dashboard .dashboard-stat strong,
+body:not(.dark-mode) #dashboard .dashboard-stat .stat-value {
+    color: #111827;
+}
+
+/* Stat labels */
+body:not(.dark-mode) #dashboard .dashboard-stat small {
+    color: #64748b;
+}
+
+/* Recent activity */
+body:not(.dark-mode) #dashboard .activity-row {
+    border-bottom-color: rgba(30, 64, 175, 0.08);
+}
+
+body:not(.dark-mode) #dashboard .activity-row strong {
+    color: #172033;
+}
+
+body:not(.dark-mode) #dashboard .activity-row small {
+    color: #64748b;
+}
+
+/* Sidebar */
+body:not(.dark-mode) #dashboard .dashboard-sidebar {
+    background: #ffffff;
+    border-right-color: rgba(30, 64, 175, 0.10);
+    box-shadow: 4px 0 20px rgba(30, 64, 175, 0.05);
+}
+
+body:not(.dark-mode) #dashboard .sidebar-link {
+    color: #475569;
+}
+
+body:not(.dark-mode) #dashboard .sidebar-link:hover {
+    background: #eef4ff;
+    color: #175cd3;
+}
+
+body:not(.dark-mode) #dashboard .sidebar-link.active {
+    color: #ffffff;
+}
+
+/* Header icon buttons */
+body:not(.dark-mode) #dashboard .header-icon-button {
+    background: #ffffff;
+    border-color: rgba(30, 64, 175, 0.12);
+    color: #334155;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.06);
+}
+
+/* View all button */
+body:not(.dark-mode) #dashboard #view-all-activity {
+    background: #ffffff;
+    border-color: rgba(30, 64, 175, 0.12);
+    color: #2563eb;
+}
+
+/* Mobile menu button */
+body:not(.dark-mode) #dashboard .dashboard-menu-toggle {
+    background: #ffffff;
+    border-color: rgba(30, 64, 175, 0.12);
+    color: #172033;
+}
