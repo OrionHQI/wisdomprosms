@@ -942,22 +942,44 @@ document.getElementById("logout-button")?.addEventListener("click", logoutFromDa
 // Profile page event listeners
 document.getElementById("profile-buy-number")?.addEventListener("click", () => showDashboardPlaceholder("Buy a Number"));
 
-// Dark mode toggle functionality
-const darkModeButtons = document.querySelectorAll('button[aria-label="Toggle dark mode"]');
+// ================= DARK / LIGHT MODE =================
+
+const darkModeButtons = document.querySelectorAll(
+    'button[aria-label="Toggle dark mode"]'
+);
+
+function applyTheme(isDark) {
+    document.body.classList.toggle("dark-mode", isDark);
+
+    darkModeButtons.forEach((button) => {
+        button.textContent = isDark ? "☀" : "◐";
+        button.setAttribute(
+            "aria-label",
+            isDark ? "Switch to light mode" : "Switch to dark mode"
+        );
+    });
+}
+
 darkModeButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        const isDarkMode = document.body.classList.toggle("dark-mode");
-        button.textContent = isDarkMode ? "☀" : "◐";
-        localStorage.setItem("wisdomprosms_dark_mode", isDarkMode);
+        const isDark = !document.body.classList.contains("dark-mode");
+
+        applyTheme(isDark);
+
+        localStorage.setItem(
+            "wisdomprosms_dark_mode",
+            isDark ? "true" : "false"
+        );
     });
 });
 
-// Apply saved dark mode preference on page load
-if (localStorage.getItem("wisdomprosms_dark_mode") === "true") {
-    document.body.classList.add("dark-mode");
-    darkModeButtons.forEach((button) => {
-        button.textContent = "☀";
-    });
+// Restore saved theme
+const savedTheme = localStorage.getItem("wisdomprosms_dark_mode");
+
+if (savedTheme === "true") {
+    applyTheme(true);
+} else {
+    applyTheme(false);
 }
 
 document.getElementById("profile-update-password")?.addEventListener("click", () => {
