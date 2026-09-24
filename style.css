@@ -7650,34 +7650,3 @@ body:not(.dark-mode) #dashboard .dashboard-menu-toggle {
     border-color: rgba(30, 64, 175, 0.12);
     color: #172033;
 }
-/* =========================================
-   AVAILABLE BALANCE — POLISHED
-   ========================================= */
-
-#wallet-balance {
-    font-size: 46px;
-    line-height: 1.05;
-    font-weight: 900;
-    letter-spacing: -0.025em;
-    color: #ffffff;
-}
-
-.dashboard-wallet-balance {
-    font-size: 46px;
-    line-height: 1.05;
-    font-weight: 900;
-    letter-spacing: -0.025em;
-    color: #ffffff;
-}
-
-body:not(.dark-mode) #wallet-balance,
-body:not(.dark-mode) .dashboard-wallet-balance {
-    color: #111827;
-}
-
-@media (max-width: 700px) {
-    #wallet-balance,
-    .dashboard-wallet-balance {
-        font-size: 36px;
-    }
-}
