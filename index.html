@@ -2058,33 +2058,55 @@
     </div>
 
     <!-- NUMBER SUMMARY -->
-    <div class="dashboard-stats">
+<div class="dashboard-stats">
 
-        <div class="stat-card">
-            <span class="stat-icon">📱</span>
-            <div>
-                <small>Total Numbers</small>
-                <h3 id="total-numbers">0</h3>
-            </div>
+    <!-- TOTAL NUMBERS -->
+    <div class="dashboard-stat-card">
+
+        <div class="dashboard-stat-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                19.79 19.79 0 0 1-8.63-3.07
+                19.5 19.5 0 0 1-6-6
+                A19.79 19.79 0 0 1 2.12 4.18
+                2 2 0 0 1 5.1 2h3a2 2 0 0 1 2 1.72
+                12.84 12.84 0 0 0 .7 2.81
+                2 2 0 0 1-.45 2.11L9.09 9.91
+                a16 16 0 0 0 6 6l1.27-1.27
+                a2 2 0 0 1 2.11-.45
+                12.84 12.84 0 0 0 2.81.7
+                A2 2 0 0 1 22 16.92z"/>
+            </svg>
         </div>
 
-        <div class="stat-card">
-            <span class="stat-icon">💬</span>
-            <div>
-                <small>Messages</small>
-                <h3 id="total-messages">0</h3>
-            </div>
-        </div>
-
-        <div class="stat-card">
-            <span class="stat-icon">🟢</span>
-            <div>
-                <small>Active Numbers</small>
-                <h3 id="active-numbers">0</h3>
-            </div>
+        <div class="dashboard-stat-content">
+            <span class="dashboard-stat-label">TOTAL NUMBERS</span>
+            <strong id="numbers-count">0</strong>
         </div>
 
     </div>
+
+
+    <!-- ACTIVE ORDERS -->
+    <div class="dashboard-stat-card">
+
+        <div class="dashboard-stat-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="9" cy="20" r="1.5"/>
+                <circle cx="18" cy="20" r="1.5"/>
+                <path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8
+                a2 2 0 0 0 2-1.6L21 8H6"/>
+            </svg>
+        </div>
+
+        <div class="dashboard-stat-content">
+            <span class="dashboard-stat-label">ACTIVE ORDERS</span>
+            <strong id="active-orders-count">0</strong>
+        </div>
+
+    </div>
+
+</div>
 
     <!-- NUMBERS LIST -->
     <div class="dashboard-card">
