@@ -7130,3 +7130,135 @@ body.dark-mode #profile .form-group input[readonly] {
         min-width: 140px;
     }
 }
+/* =========================================
+   BALANCE CARD — PREMIUM WALLET ICON
+   ========================================= */
+
+.wallet-illustration {
+    position: absolute;
+    right: 55px;
+    bottom: 30px;
+    width: 210px;
+    height: 160px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.wallet-body {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 165px;
+    height: 108px;
+    border-radius: 16px 16px 24px 24px;
+    border: 1px solid rgba(205, 225, 255, 0.45);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(210, 230, 255, 0.30),
+            rgba(70, 130, 235, 0.16)
+        );
+
+    box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.35),
+        inset 0 -12px 30px rgba(20, 80, 190, 0.12),
+        0 18px 35px rgba(0, 0, 0, 0.20);
+
+    backdrop-filter: blur(8px);
+
+    transform: perspective(600px) rotateY(-10deg);
+}
+
+/* Front pocket */
+.wallet-body::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 18px;
+    height: 1px;
+    background: rgba(220, 235, 255, 0.22);
+}
+
+/* Small wallet clasp */
+.wallet-body::after {
+    content: "";
+    position: absolute;
+    right: 23px;
+    top: 43px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(220, 235, 255, 0.38);
+    background: rgba(100, 155, 235, 0.18);
+    box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.15);
+}
+
+/* Wallet band */
+.wallet-band {
+    position: absolute;
+    top: 17px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: 17px;
+
+    border-top: 1px solid rgba(230, 240, 255, 0.30);
+    border-bottom: 1px solid rgba(230, 240, 255, 0.18);
+
+    background: rgba(180, 210, 255, 0.08);
+}
+
+/* Floating cards behind wallet */
+.wallet-clip {
+    position: absolute;
+    right: 38px;
+    top: 18px;
+    width: 105px;
+    height: 42px;
+
+    border-radius: 11px;
+    border: 1px solid rgba(220, 235, 255, 0.30);
+
+    background: linear-gradient(
+        145deg,
+        rgba(215, 230, 255, 0.24),
+        rgba(80, 135, 230, 0.10)
+    );
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.12),
+        inset 0 1px 2px rgba(255, 255, 255, 0.20);
+
+    transform: rotate(4deg);
+}
+
+/* Second floating card */
+.wallet-illustration::before {
+    content: "";
+    position: absolute;
+    right: 63px;
+    top: 5px;
+    width: 92px;
+    height: 36px;
+
+    border-radius: 10px;
+    border: 1px solid rgba(220, 235, 255, 0.22);
+
+    background: rgba(180, 210, 255, 0.12);
+
+    transform: rotate(-2deg);
+}
+
+/* Small blue glow */
+.wallet-illustration::after {
+    content: "";
+    position: absolute;
+    right: 120px;
+    bottom: 5px;
+    width: 70px;
+    height: 35px;
+    border-radius: 50%;
+    background: rgba(0, 145, 255, 0.28);
+    filter: blur(20px);
+}
