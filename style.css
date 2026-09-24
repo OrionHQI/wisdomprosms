@@ -7316,3 +7316,222 @@ body.dark-mode #profile .form-group input[readonly] {
         transform-origin: bottom right;
     }
 }
+/* =========================================
+   WISDOMPROSMS — SOLID BLUE 3D WALLET
+   ========================================= */
+
+.wallet-illustration {
+    position: absolute;
+    right: 35px;
+    bottom: 10px;
+    width: 270px;
+    height: 220px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Main solid wallet */
+.wallet-body {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+
+    width: 205px;
+    height: 135px;
+
+    border: none;
+    border-radius: 22px 22px 34px 34px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #3188ff 0%,
+            #1264ed 38%,
+            #0849c9 72%,
+            #06379e 100%
+        );
+
+    box-shadow:
+        inset 8px 8px 18px rgba(110, 180, 255, 0.28),
+        inset -12px -15px 22px rgba(0, 28, 105, 0.38),
+        0 25px 35px rgba(0, 25, 100, 0.38);
+
+    transform: perspective(700px) rotateY(-9deg) rotateX(2deg);
+}
+
+/* Front pocket */
+.wallet-body::before {
+    content: "";
+
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 12px;
+
+    height: 68px;
+
+    border-radius: 12px 12px 27px 27px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #2b7df4,
+            #0d55d5 65%,
+            #0844b2
+        );
+
+    box-shadow:
+        inset 0 3px 5px rgba(120, 190, 255, 0.25),
+        inset 0 -10px 15px rgba(0, 30, 110, 0.25);
+}
+
+/* Wallet clasp */
+.wallet-body::after {
+    content: "";
+
+    position: absolute;
+
+    right: 20px;
+    bottom: 37px;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #62aaff 0%,
+            #1970ed 35%,
+            #0750c9 70%,
+            #04358f 100%
+        );
+
+    box-shadow:
+        inset 2px 2px 4px rgba(150, 210, 255, 0.35),
+        inset -3px -4px 6px rgba(0, 30, 100, 0.35),
+        0 4px 8px rgba(0, 20, 80, 0.3);
+}
+
+/* Wallet flap */
+.wallet-band {
+    position: absolute;
+
+    left: 2px;
+    top: -28px;
+
+    width: 205px;
+    height: 72px;
+
+    border: none;
+    border-radius: 20px 20px 8px 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #3d91ff 0%,
+            #1670f2 40%,
+            #0953cc 75%,
+            #073fa5 100%
+        );
+
+    box-shadow:
+        inset 7px 7px 14px rgba(125, 195, 255, 0.25),
+        inset -9px -9px 18px rgba(0, 30, 110, 0.32),
+        0 12px 20px rgba(0, 25, 100, 0.22);
+
+    transform: perspective(600px) rotateY(-5deg);
+}
+
+/* Cards sticking out of the wallet */
+.wallet-clip {
+    position: absolute;
+
+    right: 48px;
+    top: -54px;
+
+    width: 105px;
+    height: 70px;
+
+    border: none;
+    border-radius: 13px 13px 8px 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #5ca7ff,
+            #287df2 48%,
+            #0951c8
+        );
+
+    box-shadow:
+        inset 5px 5px 10px rgba(170, 220, 255, 0.22),
+        inset -6px -7px 12px rgba(0, 35, 120, 0.25),
+        0 10px 20px rgba(0, 30, 100, 0.25);
+
+    transform: rotate(7deg);
+}
+
+/* Second card behind the first */
+.wallet-illustration::before {
+    content: "";
+
+    position: absolute;
+
+    right: 76px;
+    top: -66px;
+
+    width: 92px;
+    height: 62px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #4698ff,
+            #1265e7 55%,
+            #0848b5
+        );
+
+    box-shadow:
+        inset 4px 4px 9px rgba(160, 215, 255, 0.20),
+        0 9px 16px rgba(0, 25, 90, 0.20);
+
+    transform: rotate(-4deg);
+
+    z-index: -1;
+}
+
+/* Blue glow underneath */
+.wallet-illustration::after {
+    content: "";
+
+    position: absolute;
+
+    right: 15px;
+    bottom: -5px;
+
+    width: 230px;
+    height: 65px;
+
+    border-radius: 50%;
+
+    background: rgba(0, 100, 255, 0.30);
+
+    filter: blur(28px);
+
+    z-index: -2;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .wallet-illustration {
+        right: -45px;
+        bottom: 0;
+        transform: scale(0.68);
+        transform-origin: bottom right;
+    }
+}
