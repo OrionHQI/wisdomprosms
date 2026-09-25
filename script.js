@@ -400,26 +400,36 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
                 const offerCard = document.createElement("div");
                 offerCard.className = "number-option";
 
-                offerCard.innerHTML =
-                    "<div>" +
-                    "<strong>" +
-                    (item.country_name || item.country) +
-                    "</strong>" +
-                    "<small>" +
-                    (item.service_name || item.service) +
-                    "</small>" +
-                    "<small>Available: " +
-                    item.available +
-                    "</small>" +
-                    "<small>Success rate: " +
-                    item.success_rate +
-                    "</small>" +
-                    "<strong>₦" +
-                    Number(item.customer_price_ngn).toLocaleString() +
-                    "</strong>" +
-                    "</div>" +
-                    '<button type="button" class="select-number-button">Select</button>';
+                offerCard.innerHTML = `
+    <div class="number-option-info">
 
+        <div class="number-country">
+            <span class="country-flag">
+                ${item.country_name || item.country || ""}
+            </span>
+        </div>
+
+        <strong class="phone-number">
+            ${item.phone_number || item.number || item.phone || ""}
+        </strong>
+
+    </div>
+
+    <div class="number-option-action">
+
+        <strong class="number-option-price">
+            ₦${Number(item.customer_price_ngn || 0).toLocaleString()}
+        </strong>
+
+        <button
+            type="button"
+            class="select-number-button"
+        >
+            Select
+        </button>
+
+    </div>
+`;
                 const selectButton =
                     offerCard.querySelector(".select-number-button");
 
