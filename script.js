@@ -1168,41 +1168,164 @@ async function loadActiveOrders() {
         }
 
         if (ordersList) {
-            ordersList.innerHTML = "";
+    ordersList.innerHTML = "";
 
-            orders.forEach((order) => {
-                const row = document.createElement("div");
+    orders.forEach((order) => {
+        const row = document.createElement("div");
 
-                const date = new Date(order.created_at);
+        const date = new Date(order.created_at);
 
-                const formattedDate = date.toLocaleString("en-NG", {
-                    dateStyle: "medium",
-                    timeStyle: "short"
-                });
+        const formattedDate = date.toLocaleString("en-NG", {
+            dateStyle: "medium",
+            timeStyle: "short"
+        });
 
-                row.className = "active-order-row";
+        row.className = "active-order-row";
 
-                row.innerHTML = `
-    <div>
-        <strong>${order.phone_number}</strong>
-        <small>${order.service || "Unknown service"}</small>
-        <small>${order.country || "Unknown country"}</small>
-    </div>
+        // Support whichever code field your backend returns
+        const verificationCode =
+            order.code ||
+            order.verification_code ||
+            order.sms_code ||
+            order.otp ||
+            "";
 
-    <div>
-        <small>${formattedDate}</small>
-    </div>
+        const statusText = String(order.status || "").toLowerCase();
 
-    <div>
-        <span class="order-status ${order.status}">
-            ${order.status}
-        </span>
-    </div>
-`;
+        const codeReceived =
+            verificationCode ||
+            statusText.includes("code") ||
+            statusText.includes("completed");
 
-                ordersList.appendChild(row);
+        row.innerHTML = `
+            <div class="active-order-header">
+                <div>
+                    <strong>${order.phone_number || "Number unavailable"}</strong>
+                    <small>${order.service || "Unknown service"}</small>
+                </div>
+
+                <button
+                    type="button"
+                    class="copy-number-button"
+                    data-number="${order.phone_number || ""}"
+                    title="Copy number"
+                >
+                    📋
+                </button>
+            </div>
+
+            <div class="active-order-details">
+
+                <div>
+                    <small>Country</small>
+                    <strong>${order.country || "Unknown country"}</strong>
+                </div>
+
+                <div>
+                    <small>Purchased</small>
+                    <strong>${formattedDate}</strong>
+                </div>
+
+                <div>
+                    <small>Status</small>
+
+                    <span class="order-status ${
+                        codeReceived ? "code-received" : "waiting"
+                    }">
+                        ${
+                            codeReceived
+                                ? "✓ Code Received"
+                                : "● Waiting for SMS..."
+                        }
+                    </span>
+                </div>
+
+            </div>
+
+            ${
+                codeReceived
+                    ? `
+                        <div class="verification-code-box">
+                            <div>
+                                <small>Verification Code</small>
+                                <strong>${verificationCode}</strong>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="copy-code-button"
+                                data-code="${verificationCode}"
+                            >
+                                📋
+                            </button>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="copy-code-full-button"
+                            data-code="${verificationCode}"
+                        >
+                            Copy Code
+                        </button>
+                    `
+                    : `
+                        <div class="waiting-for-sms">
+                            <span>Waiting for verification SMS...</span>
+                        </div>
+                    `
+            }
+
+        `;
+
+        ordersList.appendChild(row);
+    });
+
+    // Copy phone number
+    ordersList
+        .querySelectorAll(".copy-number-button")
+        .forEach((button) => {
+            button.addEventListener("click", async () => {
+                const number = button.dataset.number;
+
+                try {
+                    await navigator.clipboard.writeText(number);
+
+                    button.textContent = "✓";
+
+                    setTimeout(() => {
+                        button.textContent = "📋";
+                    }, 1500);
+                } catch (error) {
+                    console.error("Unable to copy number:", error);
+                }
             });
-        }
+        });
+
+    // Copy verification code
+    ordersList
+        .querySelectorAll(
+            ".copy-code-button, .copy-code-full-button"
+        )
+        .forEach((button) => {
+            button.addEventListener("click", async () => {
+                const code = button.dataset.code;
+
+                try {
+                    await navigator.clipboard.writeText(code);
+
+                    const originalText = button.textContent;
+
+                    button.textContent = "✓ Copied";
+
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 1500);
+                } catch (error) {
+                    console.error("Unable to copy code:", error);
+                }
+            });
+        });
+}
     } catch (error) {
         console.error("Unable to load active orders:", error);
     }
