@@ -7931,14 +7931,14 @@ body.dark-mode .copy-code-button,
    ========================================= */
 
 #buy-number {
-    max-width: 900px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    box-sizing: border-box;
 }
-
 #buy-number h2 {
-    margin-bottom: 20px;
+    margin: 0 0 20px;
 }
-
 /* Country + service controls */
 
 #buy-number .number-filters {
