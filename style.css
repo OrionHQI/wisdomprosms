@@ -8154,3 +8154,102 @@ body.dark-mode .number-option-price,
         font-size: 13px;
     }
 }
+.number-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 14px 16px;
+    margin-bottom: 8px;
+
+    background: var(--card-bg, #fff);
+    border: 1px solid rgba(100, 116, 139, 0.12);
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.number-option-info {
+    min-width: 0;
+}
+
+.number-option-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.number-option-main .phone-number {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-color, #111827);
+}
+
+.number-service {
+    font-size: 12px;
+    color: var(--muted-text, #64748b);
+}
+
+.number-option-meta {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+}
+
+.number-option-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-color, #111827);
+    white-space: nowrap;
+}
+
+.select-number-button {
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.select-number-button:hover {
+    background: #1d4ed8;
+}
+
+body.dark-mode .number-option,
+.dark-mode .number-option {
+    background: #111827;
+    border-color: rgba(148, 163, 184, 0.14);
+}
+
+body.dark-mode .number-option-main .phone-number,
+.dark-mode .number-option-main .phone-number,
+body.dark-mode .number-option-price,
+.dark-mode .number-option-price {
+    color: #f8fafc;
+}
+
+@media (max-width: 600px) {
+    .number-option {
+        padding: 12px;
+    }
+
+    .number-option-meta {
+        gap: 9px;
+    }
+
+    .number-option-price {
+        font-size: 12px;
+    }
+
+    .select-number-button {
+        padding: 8px 11px;
+    }
+}
