@@ -403,19 +403,19 @@ if (continueNumberButton && countrySelect && serviceSelect && numberMessage) {
                 offerCard.innerHTML = `
     <div class="number-option-info">
 
-        <div class="number-country">
-            <span class="country-flag">
+        <div class="number-option-main">
+            <strong class="phone-number">
                 ${item.country_name || item.country || ""}
-            </span>
-        </div>
+            </strong>
 
-        <strong class="phone-number">
-            ${item.phone_number || item.number || item.phone || ""}
-        </strong>
+            <small class="number-service">
+                ${item.service_name || item.service || ""}
+            </small>
+        </div>
 
     </div>
 
-    <div class="number-option-action">
+    <div class="number-option-meta">
 
         <strong class="number-option-price">
             ₦${Number(item.customer_price_ngn || 0).toLocaleString()}
